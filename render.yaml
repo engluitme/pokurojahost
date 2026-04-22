@@ -3,8 +3,8 @@ services:
   - type: web
     name: pokuroja-backend
     runtime: node
-    buildCommand: yarn --cwd pokurojahouses-main/backend install
-    startCommand: node pokurojahouses-main/backend/backend/server.js
+    buildCommand: cd pokurojahouses-main/backend && npm install
+    startCommand: cd pokurojahouses-main/backend && npm start
     envVars:
       - key: NODE_ENV
         value: production
