@@ -1,0 +1,23 @@
+services:
+  # Backend API Service + Frontend
+  - type: web
+    name: pokuroja-backend
+    runtime: node
+    buildCommand: cd backend && npm install
+    startCommand: node backend/backend/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGO_URI
+        sync: false
+      - key: MONGO_DB_NAME
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false</content>
+<parameter name="filePath">c:\Users\englu\Desktop\PokuRoja Houses\render.yaml

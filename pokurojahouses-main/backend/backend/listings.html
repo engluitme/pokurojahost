@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title  -->
+    <title>Pokuroja Houses - Your rental Hunts Ends Here</title>
+
+    <!-- Favicon  -->
+    <link rel="icon" href="img/bg-img/favicon.png">
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Additional CSS to fix footer position and 4 properties per row -->
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .wrapper {
+            flex: 1 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+        .footer-area {
+            flex-shrink: 0;
+            width: 100%;
+            position: relative;
+            bottom: 0;
+        }
+        .south-search-area,
+        .listings-content-wrapper {
+            width: 100%;
+        }
+        /* Fix for the missing closing tags and structure */
+        .advanced-search-form {
+            padding: 30px;
+            background: #fff;
+            border-radius: 5px;
+        }
+        #listings-properties-container {
+            margin-top: 30px;
+        }
+        .single-featured-property {
+            margin-bottom: 30px;
+        }
+        /* 4 properties per row on large screens */
+        @media (min-width: 1200px) {
+            .col-xl-3 {
+                -webkit-box-flex: 0;
+                -ms-flex: 0 0 25%;
+                flex: 0 0 25%;
+                max-width: 25%;
+            }
+        }
+        /* Override default Bootstrap column for xl */
+        .col-xl-4 {
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 33.33333%;
+            flex: 0 0 33.33333%;
+            max-width: 33.33333%;
+        }
+        @media (min-width: 1200px) {
+            .col-xl-3 {
+                -webkit-box-flex: 0;
+                -ms-flex: 0 0 25%;
+                flex: 0 0 25%;
+                max-width: 25%;
+            }
+        }
+        /* Banner section – at top with fixed height */
+        .banner-section {
+            width: 100%;
+            margin: 40px 0;
+            text-align: center;
+        }
+        .banner-section img {
+            width: 100%;
+            max-width: 1200px;
+            height: 300px;
+            display: block;
+            margin: 0 auto;
+            border-radius: 12px;
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="south-load"></div>
+    </div>
+
+    <!-- Wrapper for sticky footer -->
+    <div class="wrapper">
+
+        <!-- ##### Header Area Start ##### -->
+        <header class="header-area">
+            <!-- Main Header Area -->
+            <div class="main-header-area" id="stickyHeader">
+                <div class="classy-nav-container breakpoint-off">
+                    <!-- Classy Menu -->
+                    <nav class="classy-navbar justify-content-between" id="southNav">
+                        <!-- Logo -->
+                        <a class="nav-brand" href="index.html"><img src="img/bg-img/logopokuroja.png" alt=""></a>
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+                            <!-- close btn -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="listings.html">Properties</a></li>
+                                    <li><a href="about-us.html">About Us</a></li>
+                                    <li><a href="blog.html">Blog</a></li>
+                                    <li><a href="contact.html">Contact</a></li>
+                                </ul>
+
+                                <!-- Search Form -->
+                                <div class="south-search-form">
+                                    <form action="#" method="post">
+                                        <input type="search" name="search" id="search" aria-label="Search" placeholder="Search Anything ...">
+                                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                    </form>
+                                </div>
+
+                                <!-- Search Button -->
+                                <a href="#" class="searchbtn"><i class="fa" aria-hidden="true"></i></a>
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <!-- ##### Header Area End ##### -->
+
+        <!-- ##### Breadcumb Area Start ##### -->
+        <section class="breadcumb-area bg-img" style="background-image: url(img/bg-img/hero1.jpg);">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12">
+                        <div class="breadcumb-content">
+                            <h3 class="breadcumb-title">Listings</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ##### Breadcumb Area End ##### -->
+
+        <!-- ##### Advance Search Area Start ##### -->
+        <div class="south-search-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="advanced-search-form">
+                            <!-- Search Title -->
+                            <div class="search-title">
+                                <p>Search for your home</p>
+                            </div>
+                            <!-- Search Form -->
+                            <form action="#" method="post" id="advanceSearch">
+                                <div class="row">
+                                    <div class="col-12 col-md-4 col-lg-3">
+                                        <div class="form-group">
+                                            <select class="form-control" id="category">
+                                                <option value="">All Categories</option>
+                                                <option value="kuGhetto">kuGhetto</option>
+                                                <option value="Suburb">Suburb</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-4 col-lg-3">
+                                        <div class="form-group">
+                                            <select class="form-control" id="cities">
+                                                <option>All Locations</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ##### Advance Search Area End ##### -->
+
+        <!-- ##### Listing Content Wrapper Area Start ##### -->
+        <section class="listings-content-wrapper section-padding-50">
+            <div class="container">
+                <div class="row">
+                    <!-- Dynamic properties container -->
+                    <div id="listings-properties-container" class="col-12">
+                        <div class="row" id="dynamic-listings-area">
+                            <!-- dynamic property cards will be inserted here by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                
+
+                <!-- Pagination -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="south-pagination d-flex justify-content-end">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination">
+                                    <li class="page-item"><a class="page-link active" href="#">01</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">02</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">03</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ##### Listing Content Wrapper Area End ##### -->
+
+    </div>
+    <!-- End wrapper -->
+
+    <!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area section-padding-100-0 bg-img gradient-background-overlay" style="background-image: url(img/bg-img/cta.jpg);">
+        <!-- Main Footer Area -->
+        <div class="main-footer-area">
+            <div class="container">
+                <div class="row">
+
+                    <!-- Single Footer Widget -->
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="footer-widget-area mb-100">
+                            <!-- Widget Title -->
+                            <div class="widget-title">
+                                <h6>About Us</h6>
+                            </div>
+
+                            <div class="footer-logo my-4">
+                                <img src="img/bg-img/logopokuroja.png" alt="Footer Logo">
+                            </div>
+                            <p>Browse this page for detailed property listings, with filters to refine by city, type, and price, contact the property manager to schedule a viewing.</p>
+                        </div>
+                    </div>
+
+                    <!-- Single Footer Widget -->
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="footer-widget-area mb-100">
+                            <!-- Widget Title -->
+                            <div class="widget-title">
+                                <h6>Contact Us</h6>
+                            </div>
+                            <!-- Address -->
+                            <div class="address">
+                                <h6><img src="img/icons/phone-call.png" alt=""> 263777926739</h6>
+                                <h6><img src="img/icons/envelope.png" alt=""> pokurojahouses@gmail.com</h6>
+                                <h6><img src="img/icons/location.png" alt=""> Harare Zimbabwe</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Single Footer Widget -->
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="footer-widget-area mb-100">
+                            <!-- Widget Title -->
+                            <div class="widget-title">
+                                <h6>Follow Us</h6>
+                            </div>
+                            <!-- Social Links -->
+                            <div class="d-flex" style="gap: 20px; flex-wrap: nowrap;">
+                                <a href="https://www.facebook.com/plugrenyu" target="_blank" rel="noopener" title="Facebook"><i class="fa fa-facebook"></i></a>
+                                <a href="https://instagram.com/pokuroja?igsh=emJuczBrYWtkYTQy" target="_blank" rel="noopener" title="Instagram"><i class="fa fa-instagram"></i></a>
+                                <a href="https://wa.me/263777926739" target="_blank" rel="noopener" title="WhatsApp"><i class="fa fa-whatsapp"></i></a>
+                                <a href="https://www.tiktok.com/@pokuroja?_r=1&_t=ZS-95TlqlXYtIf" target="_blank" rel="noopener" title="TikTok"><i class="fa fa-tiktok"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Single Footer Widget -->
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="footer-widget-area mb-100">
+                            <!-- Widget Title -->
+                            <div class="widget-title">
+                                <h6>Featured Properties</h6>
+                            </div>
+                            <!-- Featured Properties Slides -->
+                            <div class="featured-properties-slides owl-carousel">
+                                <!-- Single Slide -->
+                                <div class="single-featured-properties-slide">
+                                    <a href="#"><img src="img/bg-img/fea-product.jpg" alt=""></a>
+                                </div>
+                                <!-- Single Slide -->
+                                <div class="single-featured-properties-slide">
+                                    <a href="#"><img src="img/bg-img/fea-product.jpg" alt=""></a>
+                                </div>
+                                <!-- Single Slide -->
+                                <div class="single-featured-properties-slide">
+                                    <a href="#"><img src="img/bg-img/fea-product.jpg" alt=""></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Copywrite Text -->
+        <div class="copywrite-text d-flex align-items-center justify-content-center">
+            <p>Copyright &copy;2026 All rights reserved | The Property Engineers</p>
+        </div>
+    </footer>
+    <!-- ##### Footer Area End ##### -->
+
+    <!-- WhatsApp channel bar (dismissible) -->
+    <div id="whatsapp-channel-bar" class="whatsapp-channel-bar" aria-hidden="false">
+        <div class="wc-content">
+            <span>Join our WhatsApp channel for new properties</span>
+            <div style="display:flex;gap:8px;align-items:center">
+                <a href="https://whatsapp.com/channel/0029Vb6lJ1g9xVJhspgwNq3Z" target="_blank" rel="noopener" class="wc-btn">Join</a>
+                <button class="wc-close" aria-label="Close">&times;</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery (Necessary for All JavaScript Plugins) -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Plugins js -->
+    <script src="js/plugins.js"></script>
+    <script src="js/classy-nav.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+
+    <script>
+        const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+            ? 'http://localhost:10000/api'
+            : '/api';
+
+        function resolveUploadUrl(url) {
+            if (!url) return '';
+            if (url.startsWith('/api/upload/')) return url; // GridFS URL, use as-is
+            if (url.startsWith('/uploads')) return `${API_BASE.replace('/api', '')}${url}`;
+            if (url.startsWith('uploads/')) return `${API_BASE.replace('/api', '')}/${url}`;
+            return url;
+        }
+
+        let allProperties = [];
+
+        async function loadPropertiesFromAPI() {
+            // show a placeholder immediately so user isn't left staring at blank space
+            const propertiesRow = document.getElementById('dynamic-listings-area');
+            if (propertiesRow) {
+                propertiesRow.innerHTML = '<div class="col-12" style="text-align: center; padding: 40px;"><p>Loading properties...</p></div>';
+            }
+
+            try {
+                console.log('Loading properties from MongoDB via API...');
+                // set a client-side timeout in case the request hangs
+                const TIMER_MS = 10000; // 10 seconds
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), TIMER_MS);
+
+                const response = await fetch(`${API_BASE}/properties`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Cache-Control': 'no-cache'
+                    },
+                    signal: controller.signal
+                });
+
+                clearTimeout(timeoutId);
+
+                if (!response.ok) {
+                    throw new Error(`API error: ${response.status} ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                // Handle MongoDB response wrapper {value: [...], Count: N}
+                allProperties = Array.isArray(data) ? data : (data.value || []);
+                console.log('MongoDB properties count:', allProperties.length);
+                displayProperties(allProperties);
+            } catch (error) {
+                console.error('Error loading properties from MongoDB:', error);
+                const propertiesRow = document.getElementById('dynamic-listings-area');
+                if (propertiesRow) {
+                    propertiesRow.innerHTML = `<div class="col-12" style="text-align: center; padding: 40px;">
+                        <p style="color:#dc3545;">Error loading properties: ${error.message}</p>
+                    </div>`;
+                }
+            }
+        }
+
+        function displayProperties(propertiesToShow) {
+            let propertiesRow = document.getElementById('dynamic-listings-area');
+            
+            // Clear existing properties
+            propertiesRow.innerHTML = '';
+            
+            // Show message if no properties
+            if (!propertiesToShow || propertiesToShow.length === 0) {
+                propertiesRow.innerHTML = '<div class="col-12" style="text-align: center; padding: 40px;"><p>No properties available matching your criteria.</p></div>';
+                return;
+            }
+            
+            // Add properties from API
+            propertiesToShow.forEach(prop => {
+                // Use col-xl-3 for 4 properties per row on big screens
+                const col = document.createElement('div');
+                col.className = 'col-12 col-md-6 col-xl-3';
+                
+                // Fix image URL - handle both string URLs and arrays
+                let imageUrl = '';
+                if (prop.image_urls) {
+                    if (Array.isArray(prop.image_urls) && prop.image_urls.length > 0) {
+                        imageUrl = prop.image_urls[0];
+                    } else if (typeof prop.image_urls === 'string') {
+                        imageUrl = prop.image_urls;
+                    }
+                } else if (prop.image_url) {
+                    imageUrl = prop.image_url;
+                }
+                
+                imageUrl = resolveUploadUrl(imageUrl);
+                
+                // Use id from MongoDB (can be _id or id field)
+                const propId = prop.id || (prop._id && prop._id.$oid) || prop._id || '';
+                const price = prop.price ? Number(prop.price).toLocaleString() : '0';
+                const status = prop.status ? (prop.status.toLowerCase() === 'available' ? 'For Sale' : prop.status.toUpperCase()) : 'Available';
+                const bedrooms = prop.bedrooms || 2;
+                const bathrooms = prop.bathrooms || 2;
+                const area = prop.area || 120;
+                
+                col.innerHTML = `
+                    <div class="single-featured-property mb-50">
+                        <div class="property-thumb">
+                            <a href="propertydetails.html?id=${propId}">
+                                ${imageUrl ? 
+                                    `<img src="${imageUrl}" alt="${prop.title}" style="width: 100%; height: 250px; object-fit: cover;">` : 
+                                    `<div class="no-image" style="width:100%;height:250px;background:#e9ecef;display:flex;align-items:center;justify-content:center;color:#666;font-weight:600">No image</div>`
+                                }
+                            </a>
+                            <div class="tag">
+                                <span>${status}</span>
+                            </div>
+                            <div class="list-price">
+                                <p>$${price}</p>
+                            </div>
+                        </div>
+                        <div class="property-content">
+                            <h5>${prop.title}</h5>
+                            <p class="location"><img src="img/icons/location.png" alt=""> ${prop.location || prop.address || 'Location TBD'}</p>
+                            <p>${prop.description || 'Quality property in a prime location'}</p>
+                            <div class="property-meta-data d-flex align-items-end justify-content-between">
+                                <div class="new-tag">
+                                    <img src="img/icons/new.png" alt="">
+                                </div>
+                                <div class="bathroom">
+                                    <img src="img/icons/bathtub.png" alt="">
+                                    <span>${bathrooms}</span>
+                                </div>
+                                <div class="garage">
+                                    <img src="img/icons/garage.png" alt="">
+                                    <span>${bedrooms}</span>
+                                </div>
+                                <div class="space">
+                                    <img src="img/icons/space.png" alt="">
+                                    <span>${area} sq ft</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                propertiesRow.appendChild(col);
+            });
+        }
+
+        async function loadLocationsFromAPI() {
+            try {
+                console.log('Loading locations from MongoDB...');
+                const response = await fetch(`${API_BASE}/properties`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Cache-Control': 'no-cache'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API error: ${response.status}`);
+                }
+
+                const properties_raw = await response.json();
+                const properties = Array.isArray(properties_raw) ? properties_raw : (properties_raw.value || []);
+                console.log('Loaded properties from MongoDB - count:', properties.length);
+                
+                const locations = new Set();
+                const categories = new Set();
+                if (Array.isArray(properties)) {
+                    properties.forEach(prop => {
+                        if (prop.location) {
+                            locations.add(prop.location);
+                        }
+                        if (prop.category) {
+                            categories.add(prop.category);
+                        } else if (prop.propertyType) {
+                            categories.add(prop.propertyType);
+                        }
+                    });
+                }
+                
+                console.log('Extracted locations:', Array.from(locations));
+                console.log('Extracted categories:', Array.from(categories));
+
+                const citiesSelect = document.getElementById('cities');
+                if (citiesSelect) {
+                    while (citiesSelect.options.length > 1) {
+                        citiesSelect.remove(1);
+                    }
+                    
+                    if (locations.size > 0) {
+                        Array.from(locations).sort().forEach(location => {
+                            const option = document.createElement('option');
+                            option.value = location;
+                            option.textContent = location;
+                            citiesSelect.appendChild(option);
+                        });
+                        console.log('Populated locations dropdown with:', locations.size, 'locations');
+                    }
+                }
+
+                const categorySelect = document.getElementById('category');
+                if (categorySelect) {
+                    while (categorySelect.options.length > 1) {
+                        categorySelect.remove(1);
+                    }
+
+                    if (categories.size > 0) {
+                        Array.from(categories).sort().forEach(cat => {
+                            const option = document.createElement('option');
+                            option.value = cat;
+                            option.textContent = cat;
+                            categorySelect.appendChild(option);
+                        });
+                        console.log('Populated categories dropdown with:', categories.size, 'categories');
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading locations:', error);
+            }
+        }
+
+        // Setup filter listeners
+        function setupFilterListeners() {
+            const categorySelect = document.getElementById('category');
+            const citiesSelect = document.getElementById('cities');
+            const advanceSearchForm = document.getElementById('advanceSearch');
+            
+            const applyFilters = () => {
+                let filtered = allProperties;
+                
+                // Filter by category
+                const selectedCategory = categorySelect ? categorySelect.value : '';
+                if (selectedCategory) {
+                    filtered = filtered.filter(prop => {
+                        const propCategory = (prop.category || '').toLowerCase();
+                        const selectedCat = selectedCategory.toLowerCase();
+                        
+                        if (selectedCat.includes('kughetto') || selectedCat.includes('ghetto')) {
+                            return propCategory.includes('kughetto') || propCategory.includes('ghetto');
+                        } else if (selectedCat.includes('suburb')) {
+                            return propCategory.includes('suburb');
+                        }
+                        return true;
+                    });
+                }
+                
+                // Filter by location
+                const selectedLocation = citiesSelect ? citiesSelect.value : '';
+                if (selectedLocation && selectedLocation !== 'All Locations') {
+                    filtered = filtered.filter(prop => prop.location === selectedLocation);
+                }
+                
+                displayProperties(filtered);
+            };
+            
+            if (categorySelect) categorySelect.addEventListener('change', applyFilters);
+            if (citiesSelect) citiesSelect.addEventListener('change', applyFilters);
+            if (advanceSearchForm) {
+                advanceSearchForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    applyFilters();
+                });
+            }
+        }
+
+        // Load properties when page loads
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Load properties first from Supabase
+            await loadPropertiesFromAPI();
+            // Then load locations (which extracts from displayed properties)
+            await loadLocationsFromAPI();
+            // Finally setup filters
+            setupFilterListeners();
+        });
+    </script>
+
+</body>
+
+</html>

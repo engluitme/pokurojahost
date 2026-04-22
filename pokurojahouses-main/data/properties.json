@@ -1,0 +1,46 @@
+[
+  {
+    "id": "1",
+    "title": "Villa in Budiriro 4",
+    "price": "945679",
+    "address": "Budiriro 4, Harare",
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "area": 2500,
+    "category": "Suburb",
+    "propertyType": "House",
+    "location": "Budiriro 4",
+    "description": "Spacious modern villa with excellent finishing and secure compound in a prime residential area.",
+    "status": "available",
+    "image_url": "/img/bg-img/feature1.jpg",
+    "image_urls": [
+      "/img/bg-img/feature1.jpg"
+    ],
+    "created_at": "2026-03-27T13:37:53.688Z"
+  },
+  {
+    "id": "1775315038930",
+    "title": "2 Room in Kuwadzana",
+    "price": "345",
+    "bedrooms": 2,
+    "bathrooms": 2,
+    "area": 120,
+    "category": "kuGhetto",
+    "propertyType": "Apartment",
+    "location": "Kuwanda 3",
+    "description": "2 Rooms in Kuwadzana theyre going for $40",
+    "image_url": "/uploads/image-1775315011957-334102709.jpg",
+    "image_urls": [
+      "/uploads/image-1775315011957-334102709.jpg",
+      "/uploads/image-1775315018833-360040179.jpg"
+    ],
+    "status": "available",
+    "agentFee": 34,
+    "nonRefundableFee": 4,
+    "landlordName": "Mr Gerald",
+    "landlordSurname": "Kubara",
+    "landlordPhone": "087655353",
+    "created_at": "2026-04-04T15:03:58.931Z",
+    "_id": "69d1285ea178bd3efee7acf6"
+  }
+]

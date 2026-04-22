@@ -1,0 +1,80 @@
+window.PROPERTY_DATA = {
+  "1": {
+    "id": 1,
+    "title": "Villa in Budiriro 4",
+    "price": "$945,679",
+    "location": "Budiriro 4, Harare",
+    "description": "Spacious villa with modern finishes and a private garden. 2 Bedrooms | 120 sq ft",
+    "images": ["img/bg-img/feature1.jpg", "img/bg-img/hero4.jpg"],
+    "baths": 2,
+    "garage": 2,
+    "space": "120 sq ft",
+    "features": ["Private Patio"],
+    "realtor": {"name":"eng lui","phone":"263777926739","email":"pokurojahouses@gmail.com","image":""}
+  },
+  "2": {
+    "id": 2,
+    "title": "Town House in Budiriro 4",
+    "price": "$845,000",
+    "location": "Budiriro 4, Harare",
+    "description": "Charming town house close to local amenities. 2 Bedrooms | 100 sq ft",
+    "images": ["img/bg-img/feature2.jpg","img/bg-img/hero5.jpg"],
+    "baths": 2,
+    "garage": 1,
+    "space": "100 sq ft",
+    "features": ["Near Park", "Modern Kitchen"],
+    "realtor": {"name":"eng lui","phone":"263777926739","email":"pokurojahouses@gmail.com","image":""}
+  },
+  "3": {
+    "id": 3,
+    "title": "Town House in Budiriro 4",
+    "price": "$755,000",
+    "location": "Budiriro 4, Harare",
+    "description": "Cozy town house suited for families. 2 Bedrooms | 95 sq ft",
+    "images": ["img/bg-img/feature3.jpg"],
+    "baths": 2,
+    "garage": 2,
+    "space": "95 sq ft",
+    "features": ["School Nearby","Good Transport"],
+    "realtor": {"name":"eng lui","phone":"263777926739","email":"pokurojahouses@gmail.com","image":""}
+  },
+  "4": {
+    "id": 4,
+    "title": "Villa in Budiriro 4",
+    "price": "$1,045,000",
+    "location": "Budiriro 4, Harare",
+    "description": "Large villa with pool and extensive grounds. 3 Bedrooms | 200 sq ft",
+    "images": ["img/bg-img/feature4.jpg"],
+    "baths": 3,
+    "garage": 2,
+    "space": "200 sq ft",
+    "features": ["Pool","Large Garden"],
+    "realtor": {"name":"eng lui","phone":"263777926739","email":"pokurojahouses@gmail.com","image":""}
+  },
+  "5": {
+    "id": 5,
+    "title": "Town House in Budiriro 4",
+    "price": "$645,000",
+    "location": "Budiriro 4, Harare",
+    "description": "Affordable town house in a friendly neighborhood. 1 Bedroom | 85 sq ft",
+    "images": ["img/bg-img/feature5.jpg"],
+    "baths": 1,
+    "garage": 1,
+    "space": "85 sq ft",
+    "features": ["Affordable","Close to Shops"],
+    "realtor": {"name":"eng lui","phone":"263777926739","email":"pokurojahouses@gmail.com","image":""}
+  },
+  "6": {
+    "id": 6,
+    "title": "Town House in Budiriro 4",
+    "price": "$1,245,000",
+    "location": "Budiriro 4, Harare",
+    "description": "Premium town house with rooftop terrace. 4 Bedrooms | 300 sq ft",
+    "images": ["img/bg-img/feature6.jpg"],
+    "baths": 4,
+    "garage": 3,
+    "space": "300 sq ft",
+    "features": ["Rooftop Terrace","Luxury Finishings"],
+    "realtor": {"name":"eng lui","phone":"263777926739","email":"pokurojahouses@gmail.com","image":""}
+  }
+};

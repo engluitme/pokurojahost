@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth Test</title>
+    <style>
+        body { font-family: Arial; padding: 20px; background: #f5f5f5; }
+        .container { max-width: 600px; margin: 0 auto; background: white; padding: 20px; border-radius: 5px; }
+        .section { margin: 20px 0; border: 1px solid #ddd; padding: 10px; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; background: #3498db; color: white; border: none; border-radius: 3px; }
+        pre { background: #f0f0f0; padding: 10px; overflow-x: auto; }
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Authentication Debug</h1>
+        
+        <div class="section">
+            <h3>1. localStorage Token</h3>
+            <button onclick="checkToken()">Check Token</button>
+            <pre id="tokenInfo"></pre>
+        </div>
+
+        <div class="section">
+            <h3>2. Login Test</h3>
+            <button onclick="login()">Login (admin@pokuroja.com / admin123)</button>
+            <pre id="loginResult"></pre>
+        </div>
+
+        <div class="section">
+            <h3>3. Verify Token</h3>
+            <button onclick="verifyToken()">Verify Token</button>
+            <pre id="verifyResult"></pre>
+        </div>
+
+        <div class="section">
+            <h3>4. Check All</h3>
+            <button onclick="runAll()">Run All Tests</button>
+            <pre id="allResults"></pre>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = window.location.origin + '/api';
+
+        function checkToken() {
+            const token = localStorage.getItem('token');
+            const el = document.getElementById('tokenInfo');
+            if (token) {
+                el.innerHTML = `<span class="success">Token found:</span>\n${token}`;
+            } else {
+                el.innerHTML = '<span class="error">No token in localStorage</span>';
+            }
+        }
+
+        async function login() {
+            const el = document.getElementById('loginResult');
+            try {
+                const response = await fetch(`${API_BASE}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: 'admin@pokuroja.com', password: 'admin123' })
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    localStorage.setItem('token', data.token);
+                    el.innerHTML = `<span class="success">Login successful!</span>\nToken saved to localStorage`;
+                } else {
+                    el.innerHTML = `<span class="error">Login failed:</span>\n${data.error}`;
+                }
+            } catch (error) {
+                el.innerHTML = `<span class="error">Error:</span>\n${error.message}`;
+            }
+        }
+
+        async function verifyToken() {
+            const el = document.getElementById('verifyResult');
+            const token = localStorage.getItem('token');
+            
+            if (!token) {
+                el.innerHTML = '<span class="error">No token found</span>';
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/auth/verify`, {
+                    method: 'GET',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    el.innerHTML = `<span class="success">Token verified!</span>\n${JSON.stringify(data, null, 2)}`;
+                } else {
+                    el.innerHTML = `<span class="error">Verification failed:</span>\n${data.error}`;
+                }
+            } catch (error) {
+                el.innerHTML = `<span class="error">Error:</span>\n${error.message}`;
+            }
+        }
+
+        async function runAll() {
+            const el = document.getElementById('allResults');
+            el.textContent = 'Running tests...\n';
+
+            // Check existing token
+            const existingToken = localStorage.getItem('token');
+            el.textContent += `\n1. Existing token: ${existingToken ? 'Found' : 'Not found'}\n`;
+
+            // Login
+            try {
+                const loginRes = await fetch(`${API_BASE}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: 'admin@pokuroja.com', password: 'admin123' })
+                });
+
+                if (loginRes.ok) {
+                    const loginData = await loginRes.json();
+                    localStorage.setItem('token', loginData.token);
+                    el.textContent += `\n2. Login: SUCCESS\n   Token: ${loginData.token.substring(0, 50)}...\n`;
+
+                    // Verify
+                    const verifyRes = await fetch(`${API_BASE}/auth/verify`, {
+                        method: 'GET',
+                        headers: { 'Authorization': `Bearer ${loginData.token}` }
+                    });
+
+                    if (verifyRes.ok) {
+                        const verifyData = await verifyRes.json();
+                        el.textContent += `\n3. Verify: SUCCESS\n   User: ${JSON.stringify(verifyData.user)}\n`;
+
+                        // Try to navigate to addproperty
+                        el.textContent += `\n4. Ready to navigate to addproperty.html\n`;
+                        el.innerHTML += `\n<a href="addproperty.html" style="color: #3498db; text-decoration: underline;">Click here to go to Add Property</a>`;
+                    } else {
+                        const verifyData = await verifyRes.json();
+                        el.textContent += `\n3. Verify: FAILED\n   ${verifyData.error}\n`;
+                    }
+                } else {
+                    const loginData = await loginRes.json();
+                    el.textContent += `\n2. Login: FAILED\n   ${loginData.error}\n`;
+                }
+            } catch (error) {
+                el.textContent += `\n\nError: ${error.message}\n`;
+            }
+        }
+
+        // Auto-check on load
+        window.addEventListener('load', () => {
+            checkToken();
+        });
+    </script>
+</body>
+</html>

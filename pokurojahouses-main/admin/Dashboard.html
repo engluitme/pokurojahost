@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin Dashboard - PokuRoja</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f5f7fa; color: #333; }
+    .admin-container { display: flex; min-height: 100vh; }
+    .sidebar { width: 240px; background: #2c3e50; color: #fff; padding: 30px 0; }
+    .sidebar-brand { padding: 0 25px 30px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .sidebar-brand h2 { font-size: 20px; font-weight: 600; }
+    .sidebar-nav { padding: 20px 0; }
+    .nav-link { display: block; padding: 14px 25px; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 15px; font-weight: 500; transition: all 0.3s; border-left: 4px solid transparent; }
+    .nav-link:hover, .nav-link.active { background: rgba(255,255,255,0.08); color: #fff; border-left-color: #3498db; }
+    .main-content { flex: 1; display: flex; flex-direction: column; }
+    .header { background: #fff; padding: 20px 30px; border-bottom: 1px solid #e1e5eb; display: flex; justify-content: space-between; align-items: center; }
+    .header h1 { font-size: 24px; font-weight: 600; }
+    .user-info { background: #f8f9fa; padding: 8px 16px; border-radius: 6px; border: 1px solid #e1e5eb; font-size: 14px; }
+    .content { flex: 1; padding: 30px; }
+    .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; margin-bottom: 30px; }
+    .card { background: #fff; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); padding: 25px; }
+    .card h3 { font-size: 16px; font-weight: 600; color: #6c757d; margin-bottom: 15px; }
+    .stat-number { font-size: 36px; font-weight: 700; color: #2c3e50; margin: 10px 0; }
+    .recent-properties { margin-top: 20px; }
+    .recent-properties h3 { font-size: 18px; color: #2c3e50; margin-bottom: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { padding: 15px 20px; text-align: left; font-size: 14px; }
+    th { background: #f8f9fa; font-weight: 600; color: #495057; }
+    tr { border-bottom: 1px solid #e1e5eb; }
+    tr:last-child td { border-bottom: none; }
+    .status-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; text-transform: uppercase; }
+    .status-available { background: #d4edda; color: #155724; }
+    .status-sold { background: #f8d7da; color: #721c24; }
+    .status-rented { background: #fff3cd; color: #856404; }
+    .action-btn { padding: 6px 16px; background: #3498db; color: #fff; border-radius: 4px; font-size: 14px; font-weight: 500; border: none; cursor: pointer; text-decoration: none; display: inline-block; }
+    .action-btn:hover { background: #2980b9; }
+    .empty-state { text-align: center; padding: 40px 20px; color: #6c757d; }
+    .loading { text-align: center; padding: 40px; color: #6c757d; }
+    .loading::after {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #e1e5eb;
+      border-top-color: #3498db;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-left: 10px;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    /* Debug Console Styles */
+    .debug-console {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      width: 500px;
+      max-height: 300px;
+      background: #1e1e1e;
+      border: 1px solid #333;
+      border-radius: 8px 8px 0 0;
+      color: #4fc3f7;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+    }
+    .debug-console-header {
+      background: #0d47a1;
+      color: white;
+      padding: 8px 12px;
+      border-bottom: 1px solid #333;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      cursor: pointer;
+      user-select: none;
+    }
+    .debug-console-header:hover { background: #1565c0; }
+    .debug-console-logs { flex:1; overflow-y:auto; padding:8px 12px; line-height:1.5; }
+    .debug-log-line { margin-bottom:4px; padding:2px 0; }
+    .debug-log-line.success { color:#4caf50; }
+    .debug-log-line.error { color:#ff5252; }
+    .debug-log-line.warn { color:#ffa726; }
+    .debug-log-line.info { color:#4fc3f7; }
+    .debug-console.collapsed { max-height:40px; }
+    .debug-console.collapsed .debug-console-logs { display:none; }
+    .debug-clear-btn { background:#d32f2f; color:white; border:none; padding:4px 8px; border-radius:3px; cursor:pointer; font-size:11px; font-family:inherit; }
+    .debug-clear-btn:hover { background:#f44336; }
+  </style>
+</head>
+<body>
+  <!-- Debug Console Panel -->
+  <div id="debugConsole" class="debug-console collapsed">
+    <div class="debug-console-header">
+      📋 Debug Logs (Click to expand)
+      <button class="debug-clear-btn" onclick="clearDebugLogs()">Clear</button>
+    </div>
+    <div class="debug-console-logs" id="debugLogs"></div>
+  </div>
+
+  <div class="admin-container">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <h2>PokuRoja Admin</h2>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="Dashboard.html" class="nav-link active">Dashboard</a>
+        <a href="properties.html" class="nav-link">Properties</a>
+        <a href="addproperty.html" class="nav-link">Add Property</a>
+        <a href="landlorddetails.html" class="nav-link">Landlord Details</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="login.html" class="nav-link">Logout</a>
+      </nav>
+    </aside>
+    <main class="main-content">
+      <header class="header">
+        <h1 id="pageTitle">Dashboard</h1>
+        <div class="user-info">
+          <span id="userEmail">admin@pokuroja.com</span>
+        </div>
+      </header>
+      <div class="content">
+        <div class="dashboard-grid">
+          <div class="card stats-card">
+            <h3>Total Properties</h3>
+            <p class="stat-number" id="totalProperties">0</p>
+            <p>All properties in your portfolio</p>
+          </div>
+          <div class="card stats-card">
+            <h3>Available</h3>
+            <p class="stat-number" id="availableProperties">0</p>
+            <p>Properties ready for sale/rent</p>
+          </div>
+          <div class="card stats-card">
+            <h3>Sold</h3>
+            <p class="stat-number" id="soldProperties">0</p>
+            <p>Properties that have been sold</p>
+          </div>
+          <div class="card stats-card">
+            <h3>Rented</h3>
+            <p class="stat-number" id="rentedProperties">0</p>
+            <p>Properties currently rented</p>
+          </div>
+        </div>
+        <div class="card recent-properties">
+          <h3>Recent Properties</h3>
+          <table id="recentPropertiesTable">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Location</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Properties will be loaded here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // ---------- debug log interception ----------
+    const debugLogsList = [];
+    const maxDebugLogs = 100;
+    const originalLog = console.log;
+    const originalError = console.error;
+    const originalWarn = console.warn;
+    const originalInfo = console.info;
+    
+    function addDebugLog(message, type = 'info') {
+      const ts = new Date().toLocaleTimeString();
+      const entry = `[${ts}] ${message}`;
+      debugLogsList.push({ message: entry, type });
+      if (debugLogsList.length > maxDebugLogs) debugLogsList.shift();
+      const container = document.getElementById('debugLogs');
+      if (container) {
+        const line = document.createElement('div');
+        line.className = `debug-log-line ${type}`;
+        line.textContent = entry;
+        container.appendChild(line);
+        container.scrollTop = container.scrollHeight;
+      }
+    }
+    
+    console.log = function(...args){ originalLog.apply(console,args); addDebugLog(args.join(' '),'info'); };
+    console.error = function(...args){ originalError.apply(console,args); addDebugLog(args.join(' '),'error'); };
+    console.warn = function(...args){ originalWarn.apply(console,args); addDebugLog(args.join(' '),'warn'); };
+    console.info = function(...args){ originalInfo.apply(console,args); addDebugLog(args.join(' '),'info'); };
+    
+    document.addEventListener('DOMContentLoaded', function(){
+      const header = document.querySelector('.debug-console-header');
+      if (header) {
+        header.addEventListener('click', ()=>{
+          document.getElementById('debugConsole').classList.toggle('collapsed');
+        });
+      }
+    });
+    
+    function clearDebugLogs(){ 
+      debugLogsList.length=0; 
+      const c=document.getElementById('debugLogs'); 
+      if(c) c.innerHTML=''; 
+    }
+    // ---------- end debug ----------
+
+    const API_BASE = window.location.origin + '/api';
+    let currentToken = localStorage.getItem('token');
+
+    // Format price as currency
+    function formatPrice(price) {
+      if (!price && price !== 0) return '$0';
+      const numPrice = typeof price === 'string' ? parseFloat(price) : price;
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+      }).format(numPrice || 0);
+    }
+
+    // Get status badge HTML
+    function getStatusBadge(status) {
+      const statusMap = {
+        'available': { class: 'status-available', text: 'Available' },
+        'sold': { class: 'status-sold', text: 'Sold' },
+        'rented': { class: 'status-rented', text: 'Rented' }
+      };
+      
+      const statusInfo = statusMap[status?.toLowerCase()] || { class: 'status-available', text: status || 'Unknown' };
+      return `<span class="status-badge ${statusInfo.class}">${statusInfo.text}</span>`;
+    }
+
+    // Load dashboard data
+    async function loadDashboard() {
+      console.log('Loading dashboard data...');
+      
+      // Show loading state
+      document.getElementById('totalProperties').textContent = '...';
+      document.getElementById('availableProperties').textContent = '...';
+      document.getElementById('soldProperties').textContent = '...';
+      document.getElementById('rentedProperties').textContent = '...';
+      
+      const tableBody = document.querySelector('#recentPropertiesTable tbody');
+      tableBody.innerHTML = '<tr><td colspan="5" class="loading">Loading properties...</td></tr>';
+
+      try {
+        // Fetch properties from API
+        const response = await fetch(`${API_BASE}/properties`);
+        
+        if (!response.ok) {
+          throw new Error(`API responded with status ${response.status}`);
+        }
+
+        // Get response text and parse JSON
+        const responseText = await response.text();
+        console.log('Raw API response:', responseText.substring(0, 200) + '...');
+        
+        let properties;
+        try {
+          properties = JSON.parse(responseText);
+        } catch (parseError) {
+          console.error('Failed to parse JSON:', parseError);
+          throw new Error('Invalid JSON response from server');
+        }
+
+        // Handle different response formats
+        if (!Array.isArray(properties)) {
+          if (properties.data && Array.isArray(properties.data)) {
+            properties = properties.data;
+          } else if (properties.properties && Array.isArray(properties.properties)) {
+            properties = properties.properties;
+          } else if (properties.results && Array.isArray(properties.results)) {
+            properties = properties.results;
+          } else {
+            properties = [properties];
+          }
+        }
+
+        // Ensure we have an array
+        if (!Array.isArray(properties)) {
+          properties = [];
+        }
+
+        // Transform MongoDB documents to include 'id' field
+        const transformedProperties = properties.map(prop => ({
+          ...prop,
+          id: prop._id || prop.id // Use _id as id if id doesn't exist
+        }));
+
+        console.log('Transformed properties:', transformedProperties);
+
+        // Update statistics
+        const total = transformedProperties.length;
+        const available = transformedProperties.filter(p => p.status?.toLowerCase() === 'available').length;
+        const sold = transformedProperties.filter(p => p.status?.toLowerCase() === 'sold').length;
+        const rented = transformedProperties.filter(p => p.status?.toLowerCase() === 'rented').length;
+
+        document.getElementById('totalProperties').textContent = total;
+        document.getElementById('availableProperties').textContent = available;
+        document.getElementById('soldProperties').textContent = sold;
+        document.getElementById('rentedProperties').textContent = rented;
+
+        // Show recent properties (last 5)
+        const recentProperties = transformedProperties
+          .sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0))
+          .slice(0, 5);
+
+        if (recentProperties.length === 0) {
+          tableBody.innerHTML = `
+            <tr>
+              <td colspan="5" class="empty-state">
+                No properties found. <a href="addproperty.html">Add your first property</a>
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        // Render recent properties
+        tableBody.innerHTML = recentProperties.map(property => {
+          const propertyId = property.id || property._id;
+          
+          return `
+            <tr>
+              <td><strong>${property.title || 'Untitled'}</strong></td>
+              <td>${property.location || property.address || 'Not specified'}</td>
+              <td>${formatPrice(property.price)}</td>
+              <td>${getStatusBadge(property.status)}</td>
+              <td>
+                <a href="addproperty.html?id=${propertyId}" class="action-btn">Edit</a>
+              </td>
+            </tr>
+          `;
+        }).join('');
+
+      } catch (error) {
+        console.error('Error loading dashboard:', error);
+        
+        // Show error state
+        document.getElementById('totalProperties').textContent = '0';
+        document.getElementById('availableProperties').textContent = '0';
+        document.getElementById('soldProperties').textContent = '0';
+        document.getElementById('rentedProperties').textContent = '0';
+        
+        tableBody.innerHTML = `
+          <tr>
+            <td colspan="5" class="empty-state">
+              <p style="color: #dc3545;">Error loading properties: ${error.message}</p>
+              <p>Please check if the backend server is running at ${API_BASE}</p>
+              <button onclick="loadDashboard()" class="action-btn" style="margin-top: 10px;">Retry</button>
+            </td>
+          </tr>
+        `;
+      }
+    }
+
+    // Check authentication
+    async function checkAuth() {
+      if (!currentToken) {
+        window.location.href = 'login.html';
+        return false;
+      }
+
+      try {
+        const response = await fetch(`${API_BASE}/auth/verify`, {
+          method: 'GET',
+          headers: { 'Authorization': `Bearer ${currentToken}` }
+        });
+
+        if (!response.ok) {
+          throw new Error('Token invalid');
+        }
+
+        const data = await response.json();
+        document.getElementById('userEmail').textContent = data.user?.email || 'admin@pokuroja.com';
+        return true;
+      } catch (error) {
+        console.error('Auth check error:', error);
+        localStorage.removeItem('token');
+        currentToken = null;
+        window.location.href = 'login.html';
+        return false;
+      }
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', async () => {
+      const isAuthenticated = await checkAuth();
+      if (isAuthenticated) {
+        loadDashboard();
+      }
+    });
+
+  </script>
+</body>
+</html>

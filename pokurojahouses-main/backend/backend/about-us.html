@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title  -->
+    <title>Pokuroja Houses - Your rental Hunts Ends Here</title>
+
+    <!-- Favicon  -->
+    <link rel="icon" href="img/bg-img/favicon.png">
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Additional CSS -->
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+        .wrapper {
+            flex: 1 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+        .footer-area {
+            flex-shrink: 0;
+            width: 100%;
+        }
+
+        /* Landlord / renter bullet box */
+        .landlord-bullets {
+            background: #f8f9fa;
+            padding: 1.8rem;
+            border-radius: 12px;
+            margin: 25px 0 15px;
+            border-left: 6px solid #8B6F47;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+        .landlord-bullets p {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .landlord-bullets ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+        }
+        .landlord-bullets li {
+            font-size: 1.15rem;
+            padding: 10px 0 8px 35px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="%238B6F47"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>') left center no-repeat;
+            background-size: 22px;
+            margin-bottom: 6px;
+            color: #1e2a3a;
+        }
+
+        /* WhatsApp button (compact) */
+        .whatsapp-btn-compact {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #25D366;
+            color: white !important;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 10px 24px;
+            border-radius: 40px;
+            border: none;
+            box-shadow: 0 4px 8px rgba(37,211,102,0.2);
+            transition: 0.15s;
+            text-decoration: none;
+            gap: 8px;
+            letter-spacing: 0.2px;
+            margin-top: 10px;
+            width: fit-content;
+        }
+        .whatsapp-btn-compact i {
+            font-size: 1.3rem;
+        }
+        .whatsapp-btn-compact:hover {
+            background: #20b859;
+            color: white;
+            transform: scale(1.02);
+            text-decoration: none;
+        }
+
+        /* Featured properties slider */
+        .featured-properties-slides {
+            position: relative;
+        }
+        .single-featured-property {
+            margin-bottom: 0;
+        }
+        .owl-carousel .property-thumb img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        /* Footer featured slides */
+        .single-featured-properties-slide img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* WhatsApp channel bar */
+        .whatsapp-channel-bar {
+            background: #1a2c3e;
+            color: white;
+            padding: 10px 20px;
+            display: none;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+        }
+        .wc-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .wc-btn {
+            background: #25D366;
+            padding: 6px 16px;
+            border-radius: 40px;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .wc-btn:hover {
+            color: white;
+            background: #20b859;
+        }
+        .wc-close {
+            background: none;
+            border: 0;
+            color: #aaa;
+            font-size: 1.6rem;
+            cursor: pointer;
+        }
+
+        /* Fix for owl carousel */
+        .owl-carousel .owl-stage {
+            display: flex;
+        }
+        .owl-carousel .owl-item {
+            float: none;
+        }
+
+        /* Banner section – now at top, fixed height like first banner */
+        .banner-section {
+            width: 100%;
+            margin: 40px 0;
+            text-align: center;
+        }
+        .banner-section img {
+            width: 100%;
+            max-width: 1200px;  /* adjust if you want */
+            height: 300px;       /* set this to match your original banner height */
+            display: block;
+            margin: 0 auto;
+            border-radius: 12px;
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+    </style>
+
+</head>
+
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="south-load"></div>
+    </div>
+
+    <!-- Wrapper for sticky footer -->
+    <div class="wrapper">
+
+        <!-- ##### Header Area Start ##### -->
+        <header class="header-area">
+            <!-- Main Header Area -->
+            <div class="main-header-area" id="stickyHeader">
+                <div class="classy-nav-container breakpoint-off">
+                    <!-- Classy Menu -->
+                    <nav class="classy-navbar justify-content-between" id="southNav">
+                        <!-- Logo -->
+                        <a class="nav-brand" href="index.html"><img src="img/bg-img/logopokuroja.png" alt=""></a>
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+                            <!-- close btn -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="listings.html">Properties</a></li>
+                                    <li><a href="about-us.html">About Us</a></li>
+                                    <li><a href="blog.html">Blog</a></li>
+                                    <li><a href="contact.html">Contact</a></li>
+                                </ul>
+
+                                <!-- Search Form -->
+                                <div class="south-search-form">
+                                    <form action="#" method="post">
+                                        <input type="search" name="search" id="search" aria-label="Search" placeholder="Search Anything ...">
+                                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                    </form>
+                                </div>
+
+                                <!-- Search Button -->
+                                <a href="#" class="searchbtn"><i class="fa" aria-hidden="true"></i></a>
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <!-- ##### Header Area End ##### -->
+
+        <!-- ##### Breadcumb Area Start ##### -->
+        <section class="breadcumb-area bg-img" style="background-image: url(img/bg-img/hero1.jpg);">
+            <!-- Removed the container/row/col with About Us heading completely -->
+        </section>
+        <!-- ##### Breadcumb Area End ##### -->
+
+        <!-- ##### About Content Wrapper Start ##### -->
+        <section class="about-content-wrapper section-padding-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-8">
+                        <div class="section-heading text-left wow fadeInUp" data-wow-delay="250ms">
+                            <h2>We search for the perfect home</h2>
+                            <p>And deliver it to you because we are your trusted plug</p>
+                        </div>
+                        <div class="about-content">
+                            <!-- IMAGE NOW ON TOP -->
+                            <img class="wow fadeInUp about-hero-img" data-wow-delay="250ms" src="img/bg-img/ARE.png" alt="Landlord listing">
+
+                            <!-- Landlord message with bullets -->
+                            <div class="landlord-bullets wow fadeInUp" data-wow-delay="300ms">
+                                <p>Are you a landlord and you want someone to rent your property? That maybe a house, commercial space or any place. Send us a message with pics and short video</p>
+                                <ul>
+                                    <li>Send us pics</li>
+                                    <li>short video</li>
+                                    <li>your conditions</li>
+                                    <li>and location</li>
+                                </ul>
+                                <a href="https://wa.me/263777926739?text=Hello%21%20I%20want%20to%20list%20my%20property.%20Here%20are%20pics%2C%20video%2C%20conditions%20and%20location." 
+                                   target="_blank" 
+                                   rel="noopener noreferrer" 
+                                   class="whatsapp-btn-compact">
+                                    <i class="fa fa-whatsapp"></i> Chat on WhatsApp
+                                </a>
+                            </div>
+                            
+                            <p class="wow fadeInUp" data-wow-delay="450ms">
+                                Join hundreds of landlords who've found quality tenants through Pokuroja Houses. Our platform connects you with serious renters daily.
+                            </p>
+
+                            <!-- BANNER IMAGE BETWEEN SECTIONS -->
+                            <div class="banner-section wow fadeInUp" data-wow-delay="475ms" style="margin: 40px 0;">
+                                <img src="img/banner/b1-1.png" alt="Pokuroja Houses Banner" style="width: 100%; height: 300px; border-radius: 12px; object-fit: cover;">
+                            </div>
+
+                            <!-- RENTER message with bullets -->
+                            <div class="landlord-bullets wow fadeInUp" data-wow-delay="500ms">
+                                <p>Are you looking for a property to rent? Whether it’s a room, cottage, full house or apartment, tell us what you need and we will hunt for you.</p>
+                                <ul>
+                                    <li>Preferred locations</li>
+                                    <li>Budget per month</li>
+                                    <li>Move-in date</li>
+                                    <li>Type of property you want</li>
+                                </ul>
+                                <a href="https://wa.me/263777926739?text=Hello%21%20I%20am%20looking%20for%20accommodation.%20Here%20are%20my%20location%2C%20budget%2C%20move-in%20date%20and%20property%20type." 
+                                   target="_blank" 
+                                   rel="noopener noreferrer" 
+                                   class="whatsapp-btn-compact">
+                                    <i class="fa fa-whatsapp"></i> Chat on WhatsApp
+                                </a>
+                            </div>
+
+                            <p class="wow fadeInUp" data-wow-delay="550ms">
+                                Are you looking for a property to rent? We got you covered with verified accommodation options updated daily.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-4">
+                        <div class="section-heading text-left wow fadeInUp" data-wow-delay="250ms">
+                            <h2>Featured Properties</h2>
+                            <p>Find properties that match your lifestyle and budget.</p>
+                        </div>
+
+                        <!-- Dynamic Featured Properties Slider -->
+                        <div class="featured-properties-slides owl-carousel wow fadeInUp" data-wow-delay="350ms" id="dynamic-featured-slider">
+                            <div class="single-featured-property">
+                                <div class="property-thumb">
+                                    <img src="img/bg-img/feature1.jpg" alt="">
+                                    <div class="tag"><span>Loading...</span></div>
+                                </div>
+                                <div class="property-content">
+                                    <h5>Loading properties</h5>
+                                    <p class="location"><img src="img/icons/location.png" alt="">Please wait</p>
+                                    <p>Fetching latest listings...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ##### About Content Wrapper End ##### -->
+
+        <!-- ##### Meet The Team Area Start ##### -->
+        <section class="meet-the-team-area section-padding-100-0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="section-heading">
+                            <h2>Meet The Team</h2>
+                            <p>Find properties that match your lifestyle and budget.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <!-- Single Team Member -->
+                    <div class="col-12 col-sm-6 col-lg-4">
+                        <div class="single-team-member mb-100 wow fadeInUp" data-wow-delay="250ms">
+                            <div class="team-member-thumb">
+                                <img src="img/bg-img/lui.jpg" alt="eng lui">
+                            </div>
+                            <div class="team-member-info">
+                                <div class="section-heading">
+                                    <img src="img/icons/prize.png" alt="">
+                                    <h2>eng lui</h2>
+                                    <p>Property Manager</p>
+                                </div>
+                                <div class="address">
+                                    <h6><img src="img/icons/phone-call.png" alt=""> 263777926739</h6>
+                                    <h6><img src="img/icons/envelope.png" alt=""> Pokurojahouses@gmail.com</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ##### Meet The Team Area End ##### -->
+
+    </div>
+    <!-- End wrapper -->
+
+    <!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area section-padding-100-0 bg-img gradient-background-overlay" style="background-image: url(img/bg-img/cta.jpg);">
+        <div class="main-footer-area">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="footer-widget-area mb-100">
+                            <div class="widget-title">
+                                <h6>About Us</h6>
+                            </div>
+
+                            <img src="img/bg-img/footer.jpg" alt="">
+                            <div class="footer-logo my-4">
+                                <img src="img/bg-img/logopokuroja.png" alt="Footer Logo" style="height:auto; max-height:80px;">
+                            </div>
+                            <p>Explore our featured properties and reach out to schedule an in-person or virtual viewing.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="footer-widget-area mb-100">
+                            <div class="widget-title">
+                                <h6>Contact Us</h6>
+                            </div>
+                            <div class="address">
+                                <h6><img src="img/icons/phone-call.png" alt=""> 263777926739</h6>
+                                <h6><img src="img/icons/envelope.png" alt=""> Pokurojahouses@gmail.com</h6>
+                                <h6><img src="img/icons/location.png" alt=""> Harare Zimbabwe</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="footer-widget-area mb-100">
+                            <div class="widget-title">
+                                <h6>Follow Us</h6>
+                            </div>
+                            <div class="d-flex" style="gap: 20px; flex-wrap: nowrap;">
+                                <a href="https://www.facebook.com/plugrenyu" target="_blank" rel="noopener" title="Facebook"><i class="fa fa-facebook"></i></a>
+                                <a href="https://instagram.com/pokuroja?igsh=emJuczBrYWtkYTQy" target="_blank" rel="noopener" title="Instagram"><i class="fa fa-instagram"></i></a>
+                                <a href="https://wa.me/263777926739" target="_blank" rel="noopener" title="WhatsApp"><i class="fa fa-whatsapp"></i></a>
+                                <a href="https://www.tiktok.com/@pokuroja?_r=1&_t=ZS-95TlqlXYtIf" target="_blank" rel="noopener" title="TikTok"><i class="fa fa-tiktok"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="footer-widget-area mb-100">
+                            <div class="widget-title">
+                                <h6>Featured Properties</h6>
+                            </div>
+                            <div class="featured-properties-slides owl-carousel" id="footer-featured-slider">
+                                <div class="single-featured-properties-slide">
+                                    <img src="img/bg-img/fea-product.jpg" alt="Loading...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="copywrite-text d-flex align-items-center justify-content-center">
+            <p>Copyright &copy;2026 All rights reserved | The Property Engineers</p>
+        </div>
+    </footer>
+    <!-- ##### Footer Area End ##### -->
+
+    <!-- WhatsApp channel bar (dismissible) -->
+    <div id="whatsapp-channel-bar" class="whatsapp-channel-bar" aria-hidden="false">
+        <div class="wc-content">
+            <span>Join our WhatsApp channel for new properties</span>
+            <div style="display:flex;gap:8px;align-items:center">
+                <a href="https://whatsapp.com/channel/0029Vb6lJ1g9xVJhspgwNq3Z" target="_blank" rel="noopener" class="wc-btn">Join</a>
+                <button class="wc-close" aria-label="Close">&times;</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/classy-nav.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/active.js"></script>
+
+    <script>
+        (function() {
+            try {
+                const bar = document.getElementById('whatsapp-channel-bar');
+                if (bar && !localStorage.getItem('wc-hidden')) {
+                    setTimeout(() => { 
+                        bar.style.display = 'block'; 
+                    }, 10000);
+                }
+                const btn = document.querySelector('#whatsapp-channel-bar .wc-close');
+                if (btn) {
+                    btn.addEventListener('click', function() {
+                        bar.style.display = 'none';
+                        localStorage.setItem('wc-hidden', '1');
+                    });
+                }
+            } catch (e) {}
+
+            const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+                ? 'http://localhost:10000/api'
+                : '/api';
+
+            function resolveUploadUrl(url) {
+                if (!url) return '';
+                if (url.startsWith('/api/upload/')) return url; // GridFS URL, use as-is
+                if (url.startsWith('/uploads')) return `${API_BASE.replace('/api', '')}${url}`;
+                if (url.startsWith('uploads/')) return `${API_BASE.replace('/api', '')}/${url}`;
+                return url;
+            }
+
+            async function loadProperties() {
+                const mainSlider = document.getElementById('dynamic-featured-slider');
+                const footerSlider = document.getElementById('footer-featured-slider');
+                
+                if (!mainSlider && !footerSlider) return;
+
+                try {
+                    const response = await fetch(`${API_BASE}/properties`);
+                    if (!response.ok) throw new Error('Failed to fetch');
+                    
+                    const data = await response.json();
+                    const properties = Array.isArray(data) ? data : (data.value || []);
+                    
+                    if (!properties || properties.length === 0) {
+                        if (mainSlider) {
+                            mainSlider.innerHTML = `
+                                <div class="single-featured-property">
+                                    <div class="property-thumb">
+                                        <img src="img/bg-img/feature1.jpg" alt="">
+                                        <div class="tag"><span>No Listings</span></div>
+                                    </div>
+                                    <div class="property-content">
+                                        <h5>No properties yet</h5>
+                                        <p class="location"><img src="img/icons/location.png" alt="">Check back soon</p>
+                                        <p>Be the first to list your property!</p>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                        if (footerSlider) {
+                            footerSlider.innerHTML = `
+                                <div class="single-featured-properties-slide">
+                                    <img src="img/bg-img/fea-product.jpg" alt="No properties">
+                                </div>
+                            `;
+                        }
+                        return;
+                    }
+
+                    const featured = properties.slice(0, 5);
+                    
+                    if (mainSlider) {
+                        let mainSlidesHTML = '';
+                        featured.forEach(prop => {
+                            let imageUrl = prop.image_url || 'img/bg-img/feature1.jpg';
+                            imageUrl = resolveUploadUrl(imageUrl);
+                            const price = prop.price ? Number(prop.price).toLocaleString() : '0';
+                            const status = prop.status || 'For Rent';
+                            const location = prop.location || prop.address || 'Harare';
+                            const title = prop.title || 'Property';
+                            const desc = prop.description || 'Beautiful property in prime location';
+                            const bathrooms = prop.bathrooms || 2;
+                            const bedrooms = prop.bedrooms || 3;
+                            const area = prop.area || 150;
+                            
+                            mainSlidesHTML += `
+                                <div class="single-featured-property">
+                                    <div class="property-thumb">
+                                        <img src="${imageUrl}" alt="${title}" style="width:100%; height:200px; object-fit:cover;">
+                                        <div class="tag">
+                                            <span>${status}</span>
+                                        </div>
+                                        <div class="list-price">
+                                            <p>$${price}</p>
+                                        </div>
+                                    </div>
+                                    <div class="property-content">
+                                        <h5>${title}</h5>
+                                        <p class="location"><img src="img/icons/location.png" alt="">${location}</p>
+                                        <p>${desc.substring(0, 60)}${desc.length > 60 ? '...' : ''}</p>
+                                        <div class="property-meta-data d-flex align-items-end justify-content-between">
+                                            <div class="new-tag">
+                                                <img src="img/icons/new.png" alt="">
+                                            </div>
+                                            <div class="bathroom">
+                                                <img src="img/icons/bathtub.png" alt="">
+                                                <span>${bathrooms}</span>
+                                            </div>
+                                            <div class="garage">
+                                                <img src="img/icons/garage.png" alt="">
+                                                <span>${bedrooms}</span>
+                                            </div>
+                                            <div class="space">
+                                                <img src="img/icons/space.png" alt="">
+                                                <span>${area} sq ft</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        mainSlider.innerHTML = mainSlidesHTML;
+                    }
+
+                    if (footerSlider) {
+                        let footerSlidesHTML = '';
+                        const footerProperties = properties.slice(0, 3);
+                        footerProperties.forEach(prop => {
+                            let imageUrl = prop.image_url || 'img/bg-img/fea-product.jpg';
+                            imageUrl = resolveUploadUrl(imageUrl);
+                            footerSlidesHTML += `
+                                <div class="single-featured-properties-slide">
+                                    <a href="propertydetails.html?id=${prop.id || prop._id}">
+                                        <img src="${imageUrl}" alt="${prop.title || 'Property'}" style="width:100%; height:100px; object-fit:cover; border-radius:8px;">
+                                    </a>
+                                </div>
+                            `;
+                        });
+                        footerSlider.innerHTML = footerSlidesHTML;
+                    }
+
+                    if (typeof $.fn !== 'undefined' && $.fn.owlCarousel) {
+                        if (mainSlider) {
+                            if ($(mainSlider).data('owlCarousel')) {
+                                $(mainSlider).owlCarousel('destroy');
+                            }
+                            $(mainSlider).owlCarousel({
+                                items: 1,
+                                loop: true,
+                                autoplay: true,
+                                autoplayTimeout: 5000,
+                                smartSpeed: 1000,
+                                margin: 30,
+                                nav: false,
+                                dots: true,
+                                responsive: {
+                                    0: { items: 1 },
+                                    600: { items: 1 },
+                                    1000: { items: 1 }
+                                }
+                            });
+                        }
+                        if (footerSlider) {
+                            if ($(footerSlider).data('owlCarousel')) {
+                                $(footerSlider).owlCarousel('destroy');
+                            }
+                            $(footerSlider).owlCarousel({
+                                items: 1,
+                                loop: true,
+                                autoplay: true,
+                                autoplayTimeout: 4000,
+                                smartSpeed: 800,
+                                margin: 10,
+                                nav: false,
+                                dots: false,
+                                responsive: {
+                                    0: { items: 1 },
+                                    600: { items: 1 },
+                                    1000: { items: 1 }
+                                }
+                            });
+                        }
+                    }
+
+                } catch (error) {
+                    console.error('Error loading properties:', error);
+                    if (mainSlider) {
+                        mainSlider.innerHTML = `
+                            <div class="single-featured-property">
+                                <div class="property-thumb">
+                                    <img src="img/bg-img/feature1.jpg" alt="">
+                                    <div class="tag"><span>Error</span></div>
+                                </div>
+                                <div class="property-content">
+                                    <h5>Could not load properties</h5>
+                                    <p class="location"><img src="img/icons/location.png" alt="">Please refresh</p>
+                                    <p>Error: ${error.message}</p>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    if (footerSlider) {
+                        footerSlider.innerHTML = `
+                            <div class="single-featured-properties-slide">
+                                <img src="img/bg-img/fea-product.jpg" alt="Error loading">
+                            </div>
+                        `;
+                    }
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                loadProperties();
+            });
+        })();
+    </script>
+
+</body>
+
+
+</html>

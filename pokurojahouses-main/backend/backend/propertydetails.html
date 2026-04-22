@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes">
+  <title>Pokuroja Houses – Property Details</title>
+  <link rel="icon" href="img/bg-img/favicon.png">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    img{display:block;max-width:100%}
+    a{text-decoration:none;color:inherit}
+    body{
+      font-family:'Inter',system-ui,sans-serif;
+      background:#fff;
+      color:#1c1c1c;
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+    }
+    :root{
+      --gold:#c49b63;
+      --gold-dk:#a8803e;
+      --gold-bg:#fdf6ed;
+      --text:#1c1c1c;
+      --text-2:#555;
+      --text-3:#888;
+      --border:#e8e0d5;
+      --surface:#faf8f5;
+      --white:#fff;
+      --green:#25D366;
+      --green-dk:#1db954;
+      --dark:#111009;
+    }
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:500;
+      background:#111009;
+      border-bottom:1px solid rgba(196,155,99,.2);
+    }
+    .nav-inner{
+      display:flex;
+      align-items:center;
+      justify-content:flex-start;
+      max-width:1200px;
+      margin:0 auto;
+      padding:0 15px;
+      height:70px;
+      position:relative;
+    }
+    .nav-logo{margin-right:10px}
+    .nav-logo img{height:42px;filter:brightness(0) invert(1)}
+    .nav-spacer{flex:1}
+    .nav-menu{
+      display:flex;
+      gap:28px;
+      list-style:none;
+      margin-left:auto;
+    }
+    .nav-menu a{
+      font-size:13px;
+      font-weight:500;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.8);
+      transition:color .2s;
+    }
+    .nav-menu a:hover,.nav-menu .active a{color:var(--gold)}
+    .nav-ham{
+      display:none;
+      flex-direction:column;
+      gap:5px;
+      background:none;
+      border:none;
+      cursor:pointer;
+      padding:8px;
+      order:3;
+    }
+    .nav-ham span{
+      display:block;
+      width:24px;
+      height:2.5px;
+      background:#fff;
+      border-radius:2px;
+      transition:transform .25s,opacity .25s;
+    }
+    .nav-ham.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg);background:var(--gold)}
+    .nav-ham.open span:nth-child(2){opacity:0}
+    .nav-ham.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg);background:var(--gold)}
+    @media(max-width:768px){
+      .nav-ham{display:flex}
+      .nav-spacer{display:none}
+      .nav-menu{
+        position:fixed;
+        inset:0 0 0 auto;
+        width:280px;
+        flex-direction:column;
+        gap:0;
+        background:#000;
+        border-left:1px solid var(--gold);
+        padding:30px 24px 40px;
+        transform:translateX(100%);
+        transition:transform .3s ease-in-out;
+        z-index:600;
+        box-shadow:-5px 0 30px rgba(0,0,0,.8);
+        margin:0;
+        display:flex;
+      }
+      .nav-menu.open{transform:translateX(0)}
+      .nav-menu .mobile-header{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:30px;
+        padding-bottom:15px;
+        border-bottom:1px solid rgba(196,155,99,.3);
+      }
+      .nav-menu .mobile-logo img{height:35px;filter:brightness(0) invert(1)}
+      .nav-menu .mobile-close{
+        background:none;
+        border:none;
+        color:var(--gold);
+        font-size:28px;
+        cursor:pointer;
+        line-height:1;
+        padding:0 5px;
+      }
+      .nav-menu li{width:100%;border-bottom:1px solid rgba(255,255,255,.1)}
+      .nav-menu a{
+        display:block;
+        padding:16px 0;
+        font-size:16px;
+        color:rgba(255,255,255,.9)!important;
+        text-transform:uppercase;
+        letter-spacing:1px;
+        transition:color .2s,padding-left .2s;
+      }
+      .nav-menu a:hover,.nav-menu .active a{color:var(--gold)!important;padding-left:8px}
+    }
+    @media(min-width:769px){.nav-menu .mobile-header{display:none}}
+    .wrap{max-width:1200px;margin:0 auto;padding:0}
+    .layout{
+      display:grid;
+      grid-template-columns:1fr 340px;
+      gap:40px;
+      padding:40px 20px 80px;
+      align-items:start;
+    }
+    @media(max-width:900px){
+      .layout{grid-template-columns:1fr;gap:28px;padding:0 0 56px}
+      .sidebar{order:2;padding:0 20px}
+      main{order:1}
+    }
+    .gallery{margin:0;padding:0;width:100%;position:relative;background:#000}
+    .gallery-container{position:relative;width:100%;overflow:hidden;touch-action:pan-y pinch-zoom}
+    .gallery-track{display:flex;transition:transform .3s ease-out;cursor:grab}
+    .gallery-track:active{cursor:grabbing}
+    .gallery-slide{flex:0 0 100%;width:100%;aspect-ratio:16/10;position:relative;overflow:hidden}
+    .gallery-slide img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      object-position:top;
+      display:block;
+      pointer-events:none;
+      background:#f0f0f0;
+    }
+    .gallery-arrow{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      width:44px;
+      height:44px;
+      background:rgba(0,0,0,.6);
+      border:2px solid rgba(255,255,255,.3);
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      z-index:20;
+      color:#fff;
+      font-size:24px;
+      transition:all .2s ease;
+      backdrop-filter:blur(4px);
+    }
+    .gallery-arrow:hover{background:rgba(196,155,99,.8);border-color:var(--gold)}
+    .gallery-arrow-left{left:16px}
+    .gallery-arrow-right{right:16px}
+    @media(max-width:768px){
+      .gallery-arrow{width:36px;height:36px;font-size:20px}
+      .gallery-arrow-left{left:8px}
+      .gallery-arrow-right{right:8px}
+    }
+    .g-pill{
+      position:absolute;
+      bottom:16px;
+      right:16px;
+      background:rgba(0,0,0,.7);
+      backdrop-filter:blur(8px);
+      color:rgba(255,255,255,.95);
+      font-size:14px;
+      font-weight:500;
+      padding:6px 16px;
+      border-radius:30px;
+      z-index:10;
+      border:1px solid rgba(255,255,255,.2);
+      box-shadow:0 2px 10px rgba(0,0,0,.3);
+    }
+    .g-thumbs-container{
+      width:100%;
+      overflow-x:auto;
+      overflow-y:hidden;
+      -webkit-overflow-scrolling:touch;
+      background:#111;
+      padding:4px 0;
+      scrollbar-width:thin;
+      scrollbar-color:var(--gold) #333;
+    }
+    .g-thumbs-container::-webkit-scrollbar{height:4px}
+    .g-thumbs-container::-webkit-scrollbar-track{background:#333}
+    .g-thumbs-container::-webkit-scrollbar-thumb{background-color:var(--gold);border-radius:4px}
+    .g-thumbs{display:flex;gap:4px;padding:0 4px;width:max-content}
+    .g-thumb{
+      flex:0 0 80px;
+      width:80px;
+      aspect-ratio:4/3;
+      overflow:hidden;
+      cursor:pointer;
+      opacity:.6;
+      transition:opacity .2s;
+      position:relative;
+      border:2px solid transparent;
+    }
+    .g-thumb img{width:100%;height:100%;object-fit:cover}
+    .g-thumb.on{opacity:1;border-color:var(--gold)}
+    .g-thumb:hover{opacity:.9}
+    @media(max-width:600px){.g-thumb{flex:0 0 70px;width:70px}}
+    @media(max-width:480px){.g-thumb{flex:0 0 60px;width:60px}}
+    .property-info{padding:0 20px}
+    .badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+    .badge{
+      font-size:11px;
+      font-weight:500;
+      letter-spacing:.07em;
+      text-transform:uppercase;
+      padding:5px 14px;
+      border-radius:20px;
+      display:inline-block;
+    }
+    .badge-gold{background:var(--gold-bg);color:var(--gold-dk)}
+    .badge-out{background:transparent;border:1px solid #ddd;color:var(--text-3)}
+    .price{
+      font-family:'Playfair Display',Georgia,serif;
+      font-size:clamp(30px,5vw,50px);
+      font-weight:600;
+      color:var(--gold);
+      line-height:1;
+      margin-bottom:6px;
+    }
+    .ref{
+      font-size:12px;
+      color:var(--text-3);
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+    .prop-title{
+      font-family:'Playfair Display',Georgia,serif;
+      font-size:clamp(20px,3vw,34px);
+      font-weight:500;
+      color:var(--text);
+      line-height:1.25;
+      margin-bottom:12px;
+    }
+    .loc{
+      display:flex;
+      align-items:center;
+      gap:7px;
+      font-size:14px;
+      color:var(--text-2);
+      margin-bottom:28px;
+    }
+    .loc img{width:15px;height:15px;opacity:.5}
+    .divider{height:1px;background:linear-gradient(90deg,var(--gold),transparent);opacity:.3;margin:24px 0}
+    .desc-title{
+      font-family:'Playfair Display',Georgia,serif;
+      font-size:20px;
+      font-weight:500;
+      color:var(--text);
+      margin-bottom:12px;
+    }
+    .desc-body{
+      font-size:15px;
+      line-height:1.85;
+      color:var(--text-2);
+      border:2px solid #000;
+      padding:20px;
+      border-radius:12px;
+      background:#fff;
+      box-shadow:0 4px 12px rgba(0,0,0,.05);
+    }
+    .sidebar{display:flex;flex-direction:column;gap:16px;position:sticky;top:76px}
+    @media(max-width:900px){.sidebar{position:static;padding:0 20px}}
+    .card{border-radius:16px;overflow:hidden;border:1px solid var(--border);background:var(--white)}
+    .card-hd{padding:16px 20px;border-bottom:1px solid var(--border)}
+    .card-hd-lbl{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
+    .card-bd{padding:20px}
+    .card-dark{background:var(--dark);border-color:transparent}
+    .card-dark .card-hd{border-bottom-color:rgba(255,255,255,.08)}
+    .card-dark .card-hd-lbl{color:rgba(255,255,255,.35)}
+    .dark-price{
+      font-family:'Playfair Display',Georgia,serif;
+      font-size:40px;
+      font-weight:600;
+      color:var(--gold);
+      line-height:1;
+      margin-bottom:6px;
+    }
+    .dark-note{font-size:13px;color:rgba(255,255,255,.3)}
+    .fee-item{margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.1)}
+    .fee-label{
+      font-size:13px;
+      color:rgba(255,255,255,.6);
+      text-transform:uppercase;
+      letter-spacing:.5px;
+      margin-bottom:8px;
+    }
+    .fee-amount{font-size:24px;font-weight:600;color:var(--gold);line-height:1}
+    .fee-note{font-size:12px;color:rgba(255,255,255,.4);margin-top:8px;line-height:1.4}
+    .fee-info-icon{
+      display:inline-block;
+      width:16px;
+      height:16px;
+      background:rgba(196,155,99,.2);
+      border-radius:50%;
+      text-align:center;
+      line-height:16px;
+      font-size:11px;
+      color:var(--gold);
+      margin-left:6px;
+      cursor:help;
+    }
+    .agent{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+    .agent-av{
+      width:48px;
+      height:48px;
+      border-radius:50%;
+      border:1.5px solid rgba(196,155,99,.4);
+      overflow:hidden;
+      background:var(--surface);
+      flex-shrink:0;
+    }
+    .agent-av img{width:100%;height:100%;object-fit:cover}
+    .agent-name{font-size:15px;font-weight:500}
+    .agent-role{font-size:12px;color:var(--text-3);margin-top:2px}
+    .clist{list-style:none;margin-bottom:18px}
+    .clist li{
+      display:flex;
+      align-items:center;
+      gap:9px;
+      font-size:13px;
+      color:var(--text-2);
+      padding:8px 0;
+      border-bottom:1px solid var(--border);
+    }
+    .clist li:last-child{border:none}
+    .clist img{width:14px;height:14px;opacity:.4}
+    .clist a{color:var(--text-2);transition:color .2s}
+    .clist a:hover{color:var(--gold)}
+    .btn-wa{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:9px;
+      width:100%;
+      padding:14px 20px;
+      background:var(--green);
+      color:#fff;
+      border-radius:40px;
+      font-size:15px;
+      font-weight:500;
+      border:none;
+      cursor:pointer;
+      transition:background .2s,transform .15s;
+      text-decoration:none;
+    }
+    .btn-wa:hover{background:var(--green-dk);color:#fff;transform:translateY(-1px)}
+    .btn-wa:active{transform:translateY(0)}
+    .btn-wa i{font-size:18px}
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="img/bg-img/logopokuroja.png" alt="Pokuroja Houses">
+    </a>
+
+    <button class="nav-ham" id="ham" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="nav-spacer"></div>
+
+    <ul class="nav-menu" id="menu">
+      <li class="mobile-header">
+        <span class="mobile-logo">
+          <img src="img/bg-img/logopokuroja.png" alt="Pokuroja">
+        </span>
+        <button class="mobile-close" id="menuClose" aria-label="Close menu">✕</button>
+      </li>
+      <li><a href="index.html">Home</a></li>
+      <li class="active"><a href="listings.html">Properties</a></li>
+      <li><a href="about-us.html">About Us</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="layout">
+    <main>
+      <div class="gallery">
+        <div class="gallery-container" id="galleryContainer">
+          <div class="gallery-track" id="galleryTrack"></div>
+          <div class="gallery-arrow gallery-arrow-left" id="galleryPrev" onclick="window.prevSlide && window.prevSlide()">
+            <i class="fas fa-chevron-left"></i>
+          </div>
+          <div class="gallery-arrow gallery-arrow-right" id="galleryNext" onclick="window.nextSlide && window.nextSlide()">
+            <i class="fas fa-chevron-right"></i>
+          </div>
+          <span class="g-pill" id="gPill">1 / 1</span>
+        </div>
+        <div class="g-thumbs-container">
+          <div class="g-thumbs" id="thumbs"></div>
+        </div>
+      </div>
+
+      <div class="property-info">
+        <div class="badges">
+          <span class="badge badge-gold">Premium Listing</span>
+          <span class="badge badge-out" id="pStatus">For Rent</span>
+        </div>
+        <p class="price" id="pPrice">$&mdash;</p>
+        <p class="ref" id="pRef">REF: &mdash;</p>
+        <h2 class="prop-title" id="pTitle">Loading&hellip;</h2>
+        <p class="loc" id="pLoc"><img src="img/icons/location.png" alt=""> Loading&hellip;</p>
+        <div class="divider"></div>
+        <h3 class="desc-title">About this Property</h3>
+        <p class="desc-body" id="pDesc">Loading&hellip;</p>
+      </div>
+    </main>
+
+    <aside class="sidebar">
+      <div class="card card-dark">
+        <div class="card-hd"><p class="card-hd-lbl">Listing Price</p></div>
+        <div class="card-bd">
+          <p class="dark-price" id="sPrice">$30</p>
+          <p class="dark-note">Per month · Contact agent</p>
+          <div class="fee-item" id="agentFeeSection" style="display:none;">
+            <div class="fee-label">Agent Fee <span class="fee-info-icon" title="Agent fee covers our professional services for processing your application">i</span></div>
+            <div class="fee-amount" id="agentFeeAmount">$0</div>
+          </div>
+          <div class="fee-item" id="nonRefundableFeeSection" style="display:none;">
+            <div class="fee-label">Non-Refundable Fee <span class="fee-info-icon" title="This fee is paid upfront to reserve your spot. The remaining balance is paid upon deal completion.">i</span></div>
+            <div class="fee-amount" id="nonRefundableFeeAmount">$0</div>
+            <div class="fee-note">💡 <strong>Important:</strong> This is a non-refundable reservation fee. Pay this to secure your spot. The remaining balance will be paid upon deal completion and deposit.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-hd"><p class="card-hd-lbl">Your Agent</p></div>
+        <div class="card-bd">
+          <div class="agent">
+            <div class="agent-av">
+              <img src="img/bg-img/engluisig.png" alt="Eng Lui" onerror="this.style.display='none'">
+            </div>
+            <div>
+              <p class="agent-name">Eng Lui</p>
+              <p class="agent-role">Property Manager</p>
+            </div>
+          </div>
+
+          <ul class="clist">
+            <li><img src="img/icons/phone-call.png" alt=""><a href="tel:+263777926739">+263 777 926 739</a></li>
+            <li><img src="img/icons/envelope.png" alt=""><a href="mailto:pokurojahouses@gmail.com">pokurojahouses@gmail.com</a></li>
+            <li><img src="img/icons/location.png" alt=""> Harare, Zimbabwe</li>
+          </ul>
+
+          <!-- FIXED WHATSAPP BUTTON: proper <button> element with click handler -->
+          <button id="waBtn" type="button" class="btn-wa">
+            <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+          </button>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  const API = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:10000/api'
+    : '/api';
+  const pid = new URLSearchParams(location.search).get('id') || '1';
+
+  let imgs = [];
+  let currentIndex = 0;
+  let touchStartX = 0;
+  let isDragging = false;
+
+  const g = id => document.getElementById(id);
+  const tx = (id, t) => { const e = g(id); if (e) e.textContent = t; };
+  const fmt = v => '$' + (parseFloat(v) || 0).toLocaleString();
+  const res = u => {
+    if (!u) return '';
+    if (u.startsWith('/api/upload/')) return u;
+    if (u.startsWith('/uploads')) return API.replace('/api', '') + u;
+    if (u.startsWith('uploads/')) return API.replace('/api', '') + '/' + u;
+    return u;
+  };
+  const fmtNumber = v => '$' + (parseFloat(v) || 0).toLocaleString();
+
+  window.nextSlide = function() {
+    if (!imgs.length) return;
+    goToSlide((currentIndex + 1) % imgs.length);
+  };
+
+  window.prevSlide = function() {
+    if (!imgs.length) return;
+    goToSlide((currentIndex - 1 + imgs.length) % imgs.length);
+  };
+
+  function buildGallery(srcs) {
+    imgs = srcs.length ? srcs : [
+      'img/bg-img/feature1.jpg',
+      'img/bg-img/feature2.jpg',
+      'img/bg-img/feature3.jpg',
+      'img/bg-img/feature4.jpg',
+      'img/bg-img/feature5.jpg',
+      'img/bg-img/feature6.jpg'
+    ];
+
+    const track = g('galleryTrack');
+    const thumbsStrip = g('thumbs');
+    if (!track || !thumbsStrip) return;
+
+    track.innerHTML = '';
+    thumbsStrip.innerHTML = '';
+
+    imgs.forEach((src, i) => {
+      const slide = document.createElement('div');
+      slide.className = 'gallery-slide';
+
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = `Property image ${i + 1}`;
+      img.onerror = () => { img.src = 'img/bg-img/feature1.jpg'; };
+      slide.appendChild(img);
+      slide.onclick = () => openLb(i);
+      track.appendChild(slide);
+
+      const thumb = document.createElement('div');
+      thumb.className = 'g-thumb' + (i === 0 ? ' on' : '');
+      const thumbImg = document.createElement('img');
+      thumbImg.src = src;
+      thumbImg.alt = `Thumbnail ${i + 1}`;
+      thumbImg.onerror = () => { thumbImg.src = 'img/bg-img/feature1.jpg'; };
+      thumb.appendChild(thumbImg);
+      thumb.onclick = () => goToSlide(i);
+      thumbsStrip.appendChild(thumb);
+    });
+
+    g('gPill').textContent = `1 / ${imgs.length}`;
+    initSwipe();
+  }
+
+  function goToSlide(index) {
+    if (index < 0 || index >= imgs.length) return;
+    currentIndex = index;
+    const track = g('galleryTrack');
+    if (track) track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    g('gPill').textContent = `${currentIndex + 1} / ${imgs.length}`;
+    document.querySelectorAll('.g-thumb').forEach((t, i) => t.classList.toggle('on', i === currentIndex));
+  }
+
+  function initSwipe() {
+    const track = g('galleryTrack');
+    const container = g('galleryContainer');
+    if (!track || !container) return;
+
+    track.addEventListener('touchstart', e => {
+      touchStartX = e.touches[0].clientX;
+      track.style.transition = 'none';
+      isDragging = true;
+    }, { passive: true });
+
+    track.addEventListener('touchmove', e => {
+      if (!isDragging) return;
+      e.preventDefault();
+      const currentX = e.touches[0].clientX;
+      const diff = currentX - touchStartX;
+      const movePercent = (diff / container.offsetWidth) * 100;
+      track.style.transform = `translateX(${-currentIndex * 100 + movePercent}%)`;
+    }, { passive: false });
+
+    track.addEventListener('touchend', e => {
+      if (!isDragging) return;
+      const diff = e.changedTouches[0].clientX - touchStartX;
+      const threshold = container.offsetWidth * 0.2;
+      track.style.transition = 'transform 0.3s ease-out';
+      if (Math.abs(diff) > threshold) {
+        if (diff > 0 && currentIndex > 0) prevSlide();
+        else if (diff < 0 && currentIndex < imgs.length - 1) nextSlide();
+        else goToSlide(currentIndex);
+      } else {
+        goToSlide(currentIndex);
+      }
+      isDragging = false;
+    }, { passive: true });
+  }
+
+  window.openLb = index => {
+    if (index !== undefined) currentIndex = index;
+    const lbImg = g('lbImg');
+    if (lbImg) lbImg.src = imgs[currentIndex];
+    const lb = g('lb');
+    if (lb) lb.classList.add('on');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closeLb = () => {
+    const lb = g('lb');
+    if (lb) lb.classList.remove('on');
+    document.body.style.overflow = '';
+  };
+
+  window.moveLb = d => {
+    currentIndex = (currentIndex + d + imgs.length) % imgs.length;
+    const lbImg = g('lbImg');
+    if (lbImg) lbImg.src = imgs[currentIndex];
+  };
+
+  // CORE FIX: Enhanced WhatsApp button update with button click handler
+  function updateWhatsAppButton(propertyData) {
+    const waBtn = document.getElementById('waBtn');
+    if (!waBtn) return;
+    
+    const title = propertyData?.title || 'Property';
+    const ref = propertyData?.id || propertyData?._id || pid;
+    const price = propertyData?.price ? fmt(propertyData.price) : '';
+    const location = propertyData?.location || propertyData?.address || '';
+    const propertyType = propertyData?.propertyType || '';
+    const category = propertyData?.category || '';
+    const status = propertyData?.status || '';
+    const agentFee = propertyData?.agentFee || 0;
+    const nonRefundableFee = propertyData?.nonRefundableFee || 0;
+    
+    let message = `Hello, I'm interested in ${title} (Ref: ${ref})`;
+    if (location) message += `, Location: ${location}`;
+    if (propertyType) message += `, Type: ${propertyType}`;
+    if (category) message += `, Category: ${category}`;
+    if (status) message += `, Status: ${status}`;
+    if (price) message += `, Price: ${price}`;
+    if (agentFee > 0) message += `, Agent Fee: ${fmtNumber(agentFee)}`;
+    if (nonRefundableFee > 0) message += `, Non-Refundable Fee: ${fmtNumber(nonRefundableFee)}`;
+    const propertyUrl = window.location.href;
+    if (propertyUrl) message += `, Link: ${propertyUrl}`;
+    
+    // Ensure proper WhatsApp URL with correct country code format
+    const phoneNumber = '263777926739';
+    const waUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    
+    // Replace button to clear any existing handlers
+    const newBtn = waBtn.cloneNode(true);
+    waBtn.parentNode.replaceChild(newBtn, waBtn);
+    
+    // Add click handler to open WhatsApp
+    newBtn.addEventListener('click', function() {
+      window.open(waUrl, '_blank', 'noopener,noreferrer');
+    });
+  }
+
+  async function load() {
+    try {
+      const r = await fetch(`${API}/properties/${pid}`, { headers: { 'Cache-Control': 'no-cache' } });
+      if (!r.ok) throw new Error(r.status);
+      const d = await r.json();
+
+      const imageUrls = Array.isArray(d.image_urls) ? d.image_urls : (typeof d.image_urls === 'string' ? [d.image_urls] : []);
+      const ii = imageUrls.map(res).filter(Boolean);
+      if (!ii.length && d.image_url) ii.push(res(d.image_url));
+      buildGallery(ii);
+
+      const t = d.title || 'Property';
+      tx('pTitle', t);
+      tx('pPrice', fmt(d.price));
+      tx('sPrice', fmt(d.price));
+      tx('pRef', 'REF: ' + (d.id || d._id || pid));
+      tx('pDesc', d.description || 'No description available.');
+      tx('pStatus', d.status === 'available' ? 'For Rent' : (d.status || 'For Rent'));
+      const locElem = g('pLoc');
+      if (locElem) locElem.innerHTML = '<img src="img/icons/location.png" alt=""> ' + (d.location || d.address || 'Harare, Zimbabwe');
+
+      const agentFee = d.agentFee || 0;
+      const nonRefundableFee = d.nonRefundableFee || 0;
+
+      const agentFeeSection = g('agentFeeSection');
+      const agentFeeAmount = g('agentFeeAmount');
+      if (agentFee > 0 && agentFeeSection && agentFeeAmount) {
+        agentFeeAmount.textContent = fmtNumber(agentFee);
+        agentFeeSection.style.display = 'block';
+      } else if (agentFeeSection) {
+        agentFeeSection.style.display = 'none';
+      }
+
+      const nonRefundableFeeSection = g('nonRefundableFeeSection');
+      const nonRefundableFeeAmount = g('nonRefundableFeeAmount');
+      if (nonRefundableFee > 0 && nonRefundableFeeSection && nonRefundableFeeAmount) {
+        nonRefundableFeeAmount.textContent = fmtNumber(nonRefundableFee);
+        nonRefundableFeeSection.style.display = 'block';
+      } else if (nonRefundableFeeSection) {
+        nonRefundableFeeSection.style.display = 'none';
+      }
+
+      // Update WhatsApp button with property data
+      updateWhatsAppButton(d);
+
+    } catch (e) {
+      console.warn('API error, using fallback data:', e);
+      buildGallery([]);
+      tx('pTitle', 'Modern Property in Harare');
+      tx('pPrice', '$150,000');
+      tx('sPrice', '$150,000');
+      tx('pRef', 'REF: P' + String(pid).padStart(3, '0'));
+      tx('pDesc', 'Beautiful property in a prime Harare location with modern finishes, secure parking, and 24-hour security.');
+      tx('pStatus', 'For Rent');
+      const locElem = g('pLoc');
+      if (locElem) locElem.innerHTML = '<img src="img/icons/location.png" alt=""> Harare, Zimbabwe';
+      const agentFeeSection = g('agentFeeSection');
+      if (agentFeeSection) agentFeeSection.style.display = 'none';
+      const nonRefundableFeeSection = g('nonRefundableFeeSection');
+      if (nonRefundableFeeSection) nonRefundableFeeSection.style.display = 'none';
+      
+      // Fallback WhatsApp button with generic message
+      const waBtn = document.getElementById('waBtn');
+      if (waBtn) {
+        const fallbackMsg = "Hello, I'd like to enquire about a property (Pokuroja Houses).";
+        const phoneNumber = '263777926739';
+        const waUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(fallbackMsg)}`;
+        
+        // Remove any existing click handlers
+        const newBtn = waBtn.cloneNode(true);
+        waBtn.parentNode.replaceChild(newBtn, waBtn);
+        
+        // Add click handler to open WhatsApp
+        newBtn.addEventListener('click', function() {
+          window.open(waUrl, '_blank', 'noopener,noreferrer');
+        });
+      }
+    }
+  }
+
+  // Mobile menu handlers
+  const ham = g('ham');
+  const menu = g('menu');
+  const menuClose = document.getElementById('menuClose');
+
+  if (ham && menu) {
+    ham.addEventListener('click', e => {
+      e.stopPropagation();
+      ham.classList.toggle('open');
+      menu.classList.toggle('open');
+      document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+    });
+
+    if (menuClose) {
+      menuClose.addEventListener('click', () => {
+        ham.classList.remove('open');
+        menu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    }
+
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        ham.classList.remove('open');
+        menu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+
+  // Initial load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', load);
+  } else {
+    load();
+  }
+})();
+</script>
+</body>
+</html>

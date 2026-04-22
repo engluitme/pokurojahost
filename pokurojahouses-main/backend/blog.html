@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title  -->
+    <title>Pokuroja Houses - Blog</title>
+
+    <!-- Favicon  -->
+    <link rel="icon" href="img/bg-img/favicon.png">
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        /* Modal styles for blog post detail */
+        .blog-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            overflow-y: auto;
+        }
+        
+        .blog-modal-content {
+            background-color: #fff;
+            margin: 50px auto;
+            padding: 0;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 12px;
+            position: relative;
+            animation: modalFadeIn 0.3s ease-out;
+        }
+        
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-header {
+            padding: 20px 30px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h3 {
+            margin: 0;
+            color: #2c3e50;
+            font-size: 24px;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.2s;
+        }
+        
+        .modal-close:hover {
+            color: #dc3545;
+        }
+        
+        .modal-body {
+            padding: 30px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        
+        .modal-body img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .modal-body .post-meta {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .modal-body .post-content {
+            line-height: 1.8;
+            color: #333;
+        }
+        
+        @media (max-width: 768px) {
+            .blog-modal-content {
+                width: 95%;
+                margin: 30px auto;
+            }
+            .modal-header h3 {
+                font-size: 18px;
+            }
+            .modal-body {
+                padding: 20px;
+            }
+        }
+        
+        /* Featured properties slider styles */
+        .featured-properties-slides .single-featured-property {
+            margin-bottom: 0;
+        }
+        
+        .featured-properties-slides .property-thumb {
+            position: relative;
+        }
+        
+        .featured-properties-slides .property-thumb img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .featured-properties-slides .tag {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        
+        .featured-properties-slides .tag span {
+            background: #c49b63;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #fff;
+        }
+        
+        .featured-properties-slides .list-price {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.7);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+        
+        .featured-properties-slides .list-price p {
+            color: #c49b63;
+            font-weight: bold;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="south-load"></div>
+    </div>
+
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+        <div class="main-header-area" id="stickyHeader">
+            <div class="classy-nav-container breakpoint-off">
+                <nav class="classy-navbar justify-content-between" id="southNav">
+                    <a class="nav-brand" href="index.html"><img src="img/bg-img/logopokuroja.png" alt=""></a>
+                    <div class="classy-navbar-toggler">
+                        <span class="navbarToggler"><span></span><span></span><span></span></span>
+                    </div>
+                    <div class="classy-menu">
+                        <div class="classycloseIcon">
+                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        </div>
+                        <div class="classynav">
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="listings.html">Properties</a></li>
+                                <li><a href="about-us.html">About Us</a></li>
+                                <li><a href="blog.html">Blog</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                            </ul>
+                            <div class="south-search-form">
+                                <form action="#" method="post">
+                                    <input type="search" name="search" id="search" aria-label="Search" placeholder="Search Anything ...">
+                                    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                </form>
+                            </div>
+                            <a href="#" class="searchbtn"><i class="fa" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->
+
+    <!-- ##### Breadcumb Area Start ##### -->
+    <section class="breadcumb-area bg-img" style="background-image: url(img/bg-img/hero1.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcumb-content">
+                        <h3 class="breadcumb-title">Blog</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Breadcumb Area End ##### -->
+
+    <!-- ##### Blog Area Start ##### -->
+    <section class="south-blog-area section-padding-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-8">
+                    <div id="blogList"></div>
+                    <div id="blogLoading" class="single-blog-area mb-50"><p>Loading blog posts...</p></div>
+                </div>
+
+                <div class="col-12 col-lg-4">
+                    <div class="blog-sidebar-area">
+                        <!-- Search Widget -->
+                        <div class="search-widget-area mb-70">
+                            <form action="#" method="get">
+                                <input type="search" name="search" id="sidebarSearch" placeholder="Search">
+                                <button type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+
+                        <!-- Archive Widget -->
+                        <div class="south-catagories-card mb-70">
+                            <h5>Archive</h5>
+                            <ul class="catagories-menu" id="archiveList">
+                                <li><a href="#">Loading...</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Dynamic Featured Properties Widget -->
+                        <div class="featured-properties-slides owl-carousel" id="featuredPropertiesSlider"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Blog Area End ##### -->
+
+    <!-- Blog Post Modal -->
+    <div id="blogModal" class="blog-modal">
+        <div class="blog-modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Blog Post</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <div id="modalContent">Loading...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area section-padding-100-0 bg-img gradient-background-overlay" style="background-image: url(img/bg-img/cta.jpg);">
+        <div class="main-footer-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="footer-widget-area mb-100">
+                            <div class="widget-title"><h6>About Us</h6></div>
+                            <img src="img/bg-img/footer.jpg" alt="">
+                            <div class="footer-logo my-4">
+                                <img src="img/bg-img/logopokuroja.png" alt="Footer Logo" style="height:80px;">
+                            </div>
+                            <p>Explore featured properties and contact our agents for a personalized consultation.</p>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="footer-widget-area mb-100">
+                            <div class="widget-title"><h6>Contact Us</h6></div>
+                            <div class="address">
+                                <h6><img src="img/icons/phone-call.png" alt=""> 263777926739</h6>
+                                <h6><img src="img/icons/envelope.png" alt=""> pokurojahouses@gmail.com</h6>
+                                <h6><img src="img/icons/location.png" alt=""> Harare Zimbabwe</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="footer-widget-area mb-100">
+                            <div class="widget-title"><h6>Follow Us</h6></div>
+                            <div class="d-flex" style="gap: 20px; flex-wrap: nowrap;">
+                                <a href="https://www.facebook.com/plugrenyu" target="_blank" rel="noopener" title="Facebook"><i class="fa fa-facebook"></i></a>
+                                <a href="https://www.instagram.com/pokuroja?igsh=emJuczBrYWtkYTQy" target="_blank" rel="noopener" title="Instagram"><i class="fa fa-instagram"></i></a>
+                                <a href="https://wa.me/263777926739" target="_blank" rel="noopener" title="WhatsApp"><i class="fa fa-whatsapp"></i></a>
+                                <a href="https://www.tiktok.com/@pokuroja?_r=1&_t=ZS-95TlqlXYtIf" target="_blank" rel="noopener" title="TikTok"><i class="fa fa-tiktok"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="footer-widget-area mb-100">
+                            <div class="widget-title"><h6>Featured Properties</h6></div>
+                            <div class="featured-properties-slides owl-carousel" id="footerFeaturedSlider"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="copywrite-text d-flex align-items-center justify-content-center">
+            <p>Copyright &copy;2026 All rights reserved | The Property Engineers</p>
+        </div>
+    </footer>
+    <!-- ##### Footer Area End ##### -->
+
+    <!-- WhatsApp channel bar -->
+    <div id="whatsapp-channel-bar" class="whatsapp-channel-bar" aria-hidden="false">
+        <div class="wc-content">
+            <span>Join our WhatsApp channel for new properties</span>
+            <div style="display:flex;gap:8px;align-items:center">
+                <a href="https://whatsapp.com/channel/0029Vb6lJ1g9xVJhspgwNq3Z" target="_blank" rel="noopener" class="wc-btn">Join</a>
+                <button class="wc-close" aria-label="Close">&times;</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/classy-nav.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/active.js"></script>
+
+    <script>
+        const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+            ? 'http://localhost:10000/api'
+            : '/api';
+
+        function resolveUploadUrl(url) {
+            if (!url) return '';
+            if (url.startsWith('/api/upload/')) return url; // GridFS URL, use as-is
+            if (url.startsWith('/uploads')) return `${API_BASE.replace('/api', '')}${url}`;
+            if (url.startsWith('uploads/')) return `${API_BASE.replace('/api', '')}/${url}`;
+            return url;
+        }
+
+        const blogList = document.getElementById('blogList');
+        const blogLoading = document.getElementById('blogLoading');
+        let allPosts = [];
+
+        function sanitize(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return 'Unknown date';
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+        }
+
+        function openModal(postId) {
+            const post = allPosts.find(p => p.id === postId);
+            if (!post) return;
+            
+            const modal = document.getElementById('blogModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+            
+            modalTitle.textContent = post.title;
+            
+            let imageHtml = '';
+            if (post.coverImage) {
+                let imgUrl = post.coverImage;
+                if (imgUrl.startsWith('/uploads')) {
+                    imgUrl = `http://localhost:10000${imgUrl}`;
+                }
+                imageHtml = `<img src="${imgUrl}" alt="${sanitize(post.title)}" onerror="this.style.display='none'">`;
+            }
+            
+            modalContent.innerHTML = `
+                ${imageHtml}
+                <div class="post-meta">
+                    By <strong>${sanitize(post.author || 'Admin')}</strong> | ${formatDate(post.created_at)}
+                </div>
+                <div class="post-content">
+                    ${sanitize(post.content).replace(/\n/g, '<br>')}
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('blogModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        window.showPost = openModal;
+        window.closeModal = closeModal;
+
+        async function loadBlogPosts() {
+            try {
+                blogLoading.style.display = 'block';
+                const res = await fetch(`${API_BASE}/blogs`);
+                if (!res.ok) throw new Error('Failed to fetch');
+                const posts = await res.json();
+
+                allPosts = posts;
+
+                if (!Array.isArray(posts) || !posts.length) {
+                    blogLoading.innerHTML = '<p>No blog posts available yet.</p>';
+                    blogList.innerHTML = '';
+                    return;
+                }
+
+                blogList.innerHTML = posts.map(post => {
+                    const date = formatDate(post.created_at);
+                    let imageUrl = post.coverImage || '/img/blog-img/blog1.jpg';
+                    imageUrl = resolveUploadUrl(imageUrl);
+                    
+                    return `
+                        <div class="single-blog-area mb-50">
+                            <div class="blog-post-thumbnail">
+                                <img src="${imageUrl}" alt="${sanitize(post.title)}" onerror="this.src='img/blog-img/blog1.jpg';">
+                            </div>
+                            <div class="post-content">
+                                <div class="post-date"><a href="#">${date}</a></div>
+                                <a href="#" class="headline">${sanitize(post.title)}</a>
+                                <div class="post-meta"><p>By <a href="#">${sanitize(post.author || 'Admin')}</a></p></div>
+                                <p>${sanitize(post.excerpt || post.content.substring(0, 120) + '...')}</p>
+                                <button href="#" class="btn south-btn" onclick="openModal('${post.id}')">Read More</button>
+                            </div>
+                        </div>`;
+                }).join('');
+
+                // Generate archive list
+                const archiveList = document.getElementById('archiveList');
+                const months = {};
+                posts.forEach(post => {
+                    if (post.created_at) {
+                        const date = new Date(post.created_at);
+                        const monthYear = date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+                        months[monthYear] = (months[monthYear] || 0) + 1;
+                    }
+                });
+                
+                if (Object.keys(months).length > 0) {
+                    archiveList.innerHTML = Object.keys(months).map(month => 
+                        `<li><a href="#">${month} (${months[month]})</a></li>`
+                    ).join('');
+                } else {
+                    archiveList.innerHTML = '<li><a href="#">No archives yet</a></li>';
+                }
+
+                blogLoading.style.display = 'none';
+            } catch (err) {
+                blogLoading.innerHTML = `<p>Error loading blog updates: ${err.message}</p>`;
+                console.error(err);
+            }
+        }
+
+        async function loadFeaturedProperties() {
+            const mainSlider = document.getElementById('featuredPropertiesSlider');
+            const footerSlider = document.getElementById('footerFeaturedSlider');
+            
+            if (!mainSlider && !footerSlider) return;
+
+            try {
+                const response = await fetch(`${API_BASE}/properties`);
+                if (!response.ok) throw new Error('Failed to fetch');
+                
+                const data = await response.json();
+                const properties = Array.isArray(data) ? data : (data.value || []);
+                
+                if (!properties || properties.length === 0) {
+                    if (mainSlider) {
+                        mainSlider.innerHTML = `
+                            <div class="single-featured-property">
+                                <div class="property-thumb">
+                                    <img src="img/bg-img/feature1.jpg" alt="">
+                                    <div class="tag"><span>No Listings</span></div>
+                                </div>
+                                <div class="property-content">
+                                    <h5>No properties yet</h5>
+                                    <p class="location"><img src="img/icons/location.png" alt="">Check back soon</p>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    if (footerSlider) {
+                        footerSlider.innerHTML = `
+                            <div class="single-featured-properties-slide">
+                                <img src="img/bg-img/fea-product.jpg" alt="No properties">
+                            </div>
+                        `;
+                    }
+                    return;
+                }
+
+                const featured = properties.slice(0, 5);
+                
+                if (mainSlider) {
+                    let mainSlidesHTML = '';
+                    featured.forEach(prop => {
+                        let imageUrl = prop.image_urls?.[0] || prop.image_url || 'img/bg-img/feature1.jpg';
+                        if (imageUrl && imageUrl.startsWith('/uploads')) {
+                            imageUrl = `http://localhost:10000${imageUrl}`;
+                        }
+                        const price = prop.price ? Number(prop.price).toLocaleString() : '0';
+                        const status = prop.status === 'available' ? 'For Rent' : (prop.status === 'sold' ? 'Sold' : 'Rented');
+                        const location = prop.location || prop.address || 'Harare';
+                        const title = prop.title || 'Property';
+                        const desc = prop.description || 'Beautiful property in prime location';
+                        const bathrooms = prop.bathrooms || 2;
+                        const bedrooms = prop.bedrooms || 3;
+                        const area = prop.area || 150;
+                        
+                        mainSlidesHTML += `
+                            <div class="single-featured-property">
+                                <div class="property-thumb">
+                                    <img src="${imageUrl}" alt="${title}" style="width:100%; height:200px; object-fit:cover;">
+                                    <div class="tag">
+                                        <span>${status}</span>
+                                    </div>
+                                    <div class="list-price">
+                                        <p>$${price}</p>
+                                    </div>
+                                </div>
+                                <div class="property-content">
+                                    <h5>${sanitize(title)}</h5>
+                                    <p class="location"><img src="img/icons/location.png" alt="">${sanitize(location)}</p>
+                                    <p>${sanitize(desc.substring(0, 60))}${desc.length > 60 ? '...' : ''}</p>
+                                    <div class="property-meta-data d-flex align-items-end justify-content-between">
+                                        <div class="bathroom">
+                                            <img src="img/icons/bathtub.png" alt="">
+                                            <span>${bathrooms}</span>
+                                        </div>
+                                        <div class="garage">
+                                            <img src="img/icons/garage.png" alt="">
+                                            <span>${bedrooms}</span>
+                                        </div>
+                                        <div class="space">
+                                            <img src="img/icons/space.png" alt="">
+                                            <span>${area} sq ft</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    mainSlider.innerHTML = mainSlidesHTML;
+                }
+
+                if (footerSlider) {
+                    let footerSlidesHTML = '';
+                    const footerProperties = properties.slice(0, 3);
+                    footerProperties.forEach(prop => {
+                        let imageUrl = prop.image_urls?.[0] || prop.image_url || 'img/bg-img/fea-product.jpg';
+                        if (imageUrl && imageUrl.startsWith('/uploads')) {
+                            imageUrl = `http://localhost:10000${imageUrl}`;
+                        }
+                        footerSlidesHTML += `
+                            <div class="single-featured-properties-slide">
+                                <a href="propertydetails.html?id=${prop.id || prop._id}">
+                                    <img src="${imageUrl}" alt="${prop.title || 'Property'}" style="width:100%; height:100px; object-fit:cover; border-radius:8px;">
+                                </a>
+                            </div>
+                        `;
+                    });
+                    footerSlider.innerHTML = footerSlidesHTML;
+                }
+
+                // Initialize or refresh Owl Carousel
+                if (typeof $.fn !== 'undefined' && $.fn.owlCarousel) {
+                    if (mainSlider && $(mainSlider).children().length > 0) {
+                        if ($(mainSlider).data('owlCarousel')) {
+                            $(mainSlider).trigger('destroy.owl.carousel');
+                        }
+                        $(mainSlider).owlCarousel({
+                            items: 1,
+                            loop: true,
+                            autoplay: true,
+                            autoplayTimeout: 5000,
+                            smartSpeed: 1000,
+                            margin: 30,
+                            nav: false,
+                            dots: true
+                        });
+                    }
+                    if (footerSlider && $(footerSlider).children().length > 0) {
+                        if ($(footerSlider).data('owlCarousel')) {
+                            $(footerSlider).trigger('destroy.owl.carousel');
+                        }
+                        $(footerSlider).owlCarousel({
+                            items: 1,
+                            loop: true,
+                            autoplay: true,
+                            autoplayTimeout: 4000,
+                            smartSpeed: 800,
+                            margin: 10,
+                            nav: false,
+                            dots: false
+                        });
+                    }
+                }
+
+            } catch (error) {
+                console.error('Error loading properties:', error);
+                if (mainSlider) {
+                    mainSlider.innerHTML = `
+                        <div class="single-featured-property">
+                            <div class="property-thumb">
+                                <img src="img/bg-img/feature1.jpg" alt="">
+                                <div class="tag"><span>Error</span></div>
+                            </div>
+                            <div class="property-content">
+                                <h5>Could not load properties</h5>
+                                <p class="location"><img src="img/icons/location.png" alt="">Please refresh</p>
+                            </div>
+                        </div>
+                    `;
+                }
+                if (footerSlider) {
+                    footerSlider.innerHTML = `
+                        <div class="single-featured-properties-slide">
+                            <img src="img/bg-img/fea-product.jpg" alt="Error loading">
+                        </div>
+                    `;
+                }
+            }
+        }
+
+        // WhatsApp bar
+        (function() {
+            try {
+                const bar = document.getElementById('whatsapp-channel-bar');
+                if (bar && !localStorage.getItem('wc-hidden')) {
+                    setTimeout(() => { bar.style.display = 'block'; }, 10000);
+                }
+                const btn = document.querySelector('#whatsapp-channel-bar .wc-close');
+                if (btn) {
+                    btn.addEventListener('click', function() {
+                        bar.style.display = 'none';
+                        localStorage.setItem('wc-hidden', '1');
+                    });
+                }
+            } catch (e) {}
+        })();
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('blogModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadBlogPosts();
+            loadFeaturedProperties();
+            
+            // 🔄 Live updates - poll for new blog posts every 10 seconds
+            setInterval(() => {
+                loadBlogPosts();
+            }, 10000);
+            
+            // 🔄 Poll for featured properties every 15 seconds
+            setInterval(() => {
+                loadFeaturedProperties();
+            }, 15000);
+        });
+    </script>
+
+</body>
+</html>

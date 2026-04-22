@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title  -->
+    <title>Pokuroja Houses</title>
+
+    <!-- Favicon  -->
+    <link rel="icon" href="img/bg-img/favicon.png">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Social Icons CSS -->
+    <style>
+        .social-section {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+        }
+        
+        .social-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+            text-align: center;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .social-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background-color: #947054; /* Matching the site's theme color */
+        }
+        
+        .social-icons-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Specific platform colors */
+        .social-tiktok {
+            background-color: #000000;
+        }
+        
+        .social-tiktok:hover {
+            background-color: #333333;
+        }
+        
+        .social-whatsapp {
+            background-color: #25D366;
+        }
+        
+        .social-whatsapp:hover {
+            background-color: #1DA851;
+        }
+        
+        .social-facebook {
+            background-color: #3b5998;
+        }
+        
+        .social-facebook:hover {
+            background-color: #2d4373;
+        }
+        
+        .social-instagram {
+            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+        }
+        
+        .social-instagram:hover {
+            opacity: 0.9;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .social-icons-container {
+                gap: 10px;
+            }
+            
+            .social-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="south-load"></div>
+    </div>
+
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+        <!-- Top Header Area Removed on non-home pages -->
+        <!-- Main Header Area -->
+        <div class="main-header-area" id="stickyHeader">
+            <div class="classy-nav-container breakpoint-off">
+                <!-- Classy Menu -->
+                <nav class="classy-navbar justify-content-between" id="southNav">
+                    <!-- Logo -->
+                    <a class="nav-brand" href="index.html"><img src="img/bg-img/logopokuroja.png" alt=""></a>
+                    <!-- Navbar Toggler -->
+                    <div class="classy-navbar-toggler">
+                        <span class="navbarToggler"><span></span><span></span><span></span></span>
+                    </div>
+                    <!-- Menu -->
+                    <div class="classy-menu">
+                        <!-- close btn -->
+                        <div class="classycloseIcon">
+                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        </div>
+                        <!-- Nav Start -->
+                        <div class="classynav">
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="listings.html">Properties</a></li>
+                                <li><a href="about-us.html">About Us</a></li>
+                                <li><a href="blog.html">Blog</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                            </ul>
+                            <!-- Search Form -->
+                            <div class="south-search-form">
+                                <form action="#" method="post">
+                                    <input type="search" name="search" id="search" aria-label="Search" placeholder="Search Anything ...">
+                                    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                </form>
+                            </div>
+                            <!-- Search Button -->
+                            <a href="#" class="searchbtn"><i class="fa" aria-hidden="true"></i></a>
+                        </div>
+                        <!-- Nav End -->
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->
+
+    <!-- ##### Breadcumb Area Start ##### -->
+    <section class="breadcumb-area bg-img" style="background-image: url(img/bg-img/hero1.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcumb-content">
+                        <h3 class="breadcumb-title">Contact</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Breadcumb Area End ##### -->
+
+    <section class="south-contact-area section-padding-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="contact-heading">
+                        <h6>Contact info</h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-lg-4">
+                    <div class="content-sidebar">
+                        <!-- Address -->
+                        <div class="address mt-30">
+                            <h6><img src="img/icons/phone-call.png" alt=""> 263777926739</h6>
+                            <h6><img src="img/icons/envelope.png" alt=""> Pokurojahouses@gmail.com</h6>
+                            <h6><img src="img/icons/location.png" alt=""> Harare Zimbabwe</h6>
+                            
+                            <!-- Social Media Icons Section -->
+                            <div class="social-section">
+                                <div class="social-title">Connect with us on our socials</div>
+                                <div class="social-icons-container">
+                                    <a href="https://www.tiktok.com/@pokuroja?_r=1&_t=ZS-95TlqlXYtIf" target="_blank" class="social-icon social-tiktok" title="Follow us on TikTok">
+                                        <i class="fa fa-tiktok"></i>
+                                    </a>
+                                    <a href="https://wa.me/263777926739" target="_blank" class="social-icon social-whatsapp" title="Chat with us on WhatsApp">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </a>
+                                    <a href="https://www.facebook.com/plugrenyu" target="_blank" class="social-icon social-facebook" title="Follow us on Facebook">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                    <a href="https://www.instagram.com/pokuroja?igsh=b3F1dWg2NWE0dnIw" target="_blank" class="social-icon social-instagram" title="Follow us on Instagram">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form Area -->
+                <div class="col-12 col-lg-8">
+                    <div class="contact-form">
+                        <form action="#" method="post">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="text" id="contact-name" placeholder="Your Name">
+                            </div>
+                            <div class="form-group">
+                                <input type="number" class="form-control" name="number" id="contact-number" placeholder="Your Phone">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" name="email" id="contact-email" placeholder="Your Email">
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" name="message" id="message" cols="30" rows="10" placeholder="Your Message"></textarea>
+                            </div>
+                            <button type="submit" class="btn south-btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area section-padding-100-0 bg-img gradient-background-overlay" style="background-image: url(img/bg-img/cta.jpg);">
+        <!-- Main Footer Area -->
+        <div class="main-footer-area">
+            <div class="container">
+                <div class="row">
+                    <!-- Single Footer Widget -->
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="footer-widget-area mb-100">
+                            <!-- Widget Title -->
+                            <div class="widget-title">
+                                <h6>About Us</h6>
+                            </div>
+                            <img src="img/bg-img/footer.jpg" alt="">
+                            <div class="footer-logo my-4">
+                                <img src="img/bg-img/logopokuroja.png" alt="Pokuroja Logo">
+                            </div>
+                            <p>Explore curated listings updated daily and connect with our property managers for personalized assistance.</p>
+                        </div>
+                    </div>
+                    <!-- Single Footer Widget -->
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="footer-widget-area mb-100">
+                            <!-- Address -->
+                            <div class="address">
+                                <h6><img src="img/icons/phone-call.png" alt=""> 263777926739</h6>
+                                <h6><img src="img/icons/envelope.png" alt=""> Pokurojahouses@gmail.com</h6>
+                                <h6><img src="img/icons/location.png" alt=""> Harare Zimbabwe</h6>
+                                <!-- Social media icons have been removed from the footer as requested -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Single Footer Widget -->
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="footer-widget-area mb-100">
+                            <!-- Widget Title -->
+                            <div class="widget-title">
+                                <h6>Follow Us</h6>
+                            </div>
+                            <!-- Social Links -->
+                            <div class="d-flex" style="gap: 20px; flex-wrap: nowrap;">
+                                <a href="https://www.facebook.com/plugrenyu" target="_blank" rel="noopener" title="Facebook"><i class="fa fa-facebook"></i></a>
+                                <a href="https://www.instagram.com/pokuroja?igsh=emJuczBrYWtkYTQy" target="_blank" rel="noopener" title="Instagram"><i class="fa fa-instagram"></i></a>
+                                <a href="https://wa.me/263777926739" target="_blank" rel="noopener" title="WhatsApp"><i class="fa fa-whatsapp"></i></a>
+                                <a href="https://www.tiktok.com/@pokuroja?_r=1&_t=ZS-95TlqlXYtIf" target="_blank" rel="noopener" title="TikTok"><i class="fa fa-tiktok"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Single Footer Widget -->
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="footer-widget-area mb-100">
+                            <!-- Widget Title -->
+                            <div class="widget-title">
+                                <h6>Featured Properties</h6>
+                            </div>
+                            <!-- Featured Properties Slides -->
+                            <div class="featured-properties-slides owl-carousel">
+                                <!-- Single Slide -->
+                                <div class="single-featured-properties-slide">
+                                    <a href="#"><img src="img/bg-img/fea-product.jpg" alt=""></a>
+                                </div>
+                                <!-- Single Slide -->
+                                <div class="single-featured-properties-slide">
+                                    <a href="#"><img src="img/bg-img/fea-product.jpg" alt=""></a>
+                                </div>
+                                <!-- Single Slide -->
+                                <div class="single-featured-properties-slide">
+                                    <a href="#"><img src="img/bg-img/fea-product.jpg" alt=""></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Copywrite Text -->
+        <div class="copywrite-text d-flex align-items-center justify-content-center">
+            <p>
+                Copyright &copy;2026 All rights reserved | The Property Engineers
+            </p>
+        </div>
+    </footer>
+    <!-- ##### Footer Area End ##### -->
+
+    <!-- jQuery (Necessary for All JavaScript Plugins) -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Plugins js -->
+    <script src="js/plugins.js"></script>
+    <script src="js/classy-nav.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+    <!-- Google Maps -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwuyLRa1uKNtbgx6xAJVmWy-zADgegA2s"></script>
+    <script src="js/map-active.js"></script>
+
+        <!-- WhatsApp channel bar (dismissible) -->
+        <div id="whatsapp-channel-bar" class="whatsapp-channel-bar" aria-hidden="false">
+            <div class="wc-content">
+                <span>Join our WhatsApp channel for new properties</span>
+                <div style="display:flex;gap:8px;align-items:center">
+                    <a href="https://whatsapp.com/channel/0029Vb6lJ1g9xVJhspgwNq3Z" target="_blank" rel="noopener" class="wc-btn">Join</a>
+                    <button class="wc-close" aria-label="Close">&times;</button>
+                </div>
+            </div>
+        </div>
+        <script>
+            (function(){
+                try{
+                    var bar = document.getElementById('whatsapp-channel-bar');
+                    if(!bar) return;
+                    localStorage.removeItem('wc-hidden');
+                    function showBar(){
+                        bar.style.display = 'block';
+                        bar.style.animation = 'none';
+                        void bar.offsetWidth;
+                        bar.style.animation = 'wc-pop 360ms cubic-bezier(.2,.9,.2,1) both';
+                    }
+                    setTimeout(showBar, 10000);
+                    var btn=document.querySelector('#whatsapp-channel-bar .wc-close');
+                    if(btn) btn.addEventListener('click', function(){bar.style.display='none';localStorage.setItem('wc-hidden','1');});
+                }catch(e){/*ignore*/}
+            })();
+        </script>
+
+</body>
+
+</html>
+
+

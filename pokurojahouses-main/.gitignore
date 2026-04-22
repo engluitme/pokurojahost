@@ -1,0 +1,48 @@
+# Node dependencies
+node_modules/
+
+# Logs
+*.log
+
+# Environment
+.env
+
+# Archives
+*.zip
+
+# Build / Output
+dist/
+build/
+.cache/
+
+# Logs
+logs/# Node dependencies
+node_modules/
+
+# Logs
+*.log
+logs/
+
+# Environment
+.env
+**/.env
+
+# Archives
+*.zip
+
+# Build / Output
+dist/
+build/
+.cache/
+*.log
+
+# Misc
+.sass-cache/
+coverage/
+*.tmp
+Rec.zip
+
+# Render
+.render
+.render/
+Render-specific files

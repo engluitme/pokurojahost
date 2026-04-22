@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Properties - Admin</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background-color: #f5f7fa; color: #333; }
+    .admin-container { display: flex; min-height: 100vh; }
+    .sidebar { width: 260px; background: linear-gradient(180deg, #2c3e50 0%, #1a2530 100%); color: white; padding: 25px 0; flex-shrink: 0; }
+    .sidebar-brand { padding: 0 25px 30px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .sidebar-brand h2 { font-size: 20px; font-weight: 600; }
+    .sidebar-nav { padding: 20px 0; }
+    .nav-link { display: block; padding: 14px 25px; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 15px; transition: all 0.3s; border-left: 4px solid transparent; }
+    .nav-link:hover { background: rgba(255,255,255,0.05); color: white; }
+    .nav-link.active { background: rgba(255,255,255,0.08); color: white; border-left-color: #3498db; }
+    .main-content { flex: 1; display: flex; flex-direction: column; overflow: auto; }
+    .header { background: white; padding: 20px 30px; border-bottom: 1px solid #e1e5eb; display: flex; justify-content: space-between; align-items: center; }
+    .header h1 { font-size: 24px; font-weight: 600; color: #2c3e50; }
+    .user-info { background: #f8f9fa; padding: 8px 16px; border-radius: 6px; border: 1px solid #e1e5eb; font-size: 14px; display: flex; gap: 10px; }
+    .test-btn { background: #28a745; color: white; border: none; padding: 4px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; }
+    .debug-btn { background: #6c757d; color: white; border: none; padding: 4px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; }
+    .content { flex: 1; padding: 30px; background-color: #f5f7fa; }
+    .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #e1e5eb; }
+    .page-header h2 { font-size: 22px; font-weight: 600; color: #2c3e50; }
+    .btn-primary, .btn-edit, .btn-danger { padding: 10px 20px; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; border: none; text-decoration: none; display: inline-block; }
+    .btn-primary { background: #3498db; color: white; }
+    .btn-primary:hover { background: #2980b9; }
+    .btn-edit { background: #17a2b8; color: white; padding: 6px 16px; font-size: 13px; margin-right: 8px; }
+    .btn-edit:hover { background: #138496; }
+    .btn-danger { background: #dc3545; color: white; padding: 6px 16px; font-size: 13px; }
+    .btn-danger:hover { background: #c82333; }
+    .filters { display: flex; gap: 15px; margin-bottom: 25px; background: white; padding: 20px; border-radius: 8px; }
+    .filters input, .filters select { flex: 1; max-width: 300px; padding: 10px 15px; border: 2px solid #e1e5eb; border-radius: 6px; font-size: 14px; }
+    .properties-table { width: 100%; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    .properties-table thead { background: #f8f9fa; }
+    .properties-table th { padding: 18px 20px; text-align: left; font-weight: 600; color: #495057; font-size: 13px; text-transform: uppercase; border-bottom: 2px solid #e1e5eb; }
+    .properties-table td { padding: 18px 20px; border-bottom: 1px solid #e1e5eb; color: #495057; font-size: 14px; }
+    .properties-table tbody tr:hover { background-color: #f8f9fa; }
+    .property-image { width: 70px; height: 70px; border-radius: 6px; object-fit: cover; border: 1px solid #e1e5eb; }
+    .status-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; text-transform: uppercase; }
+    .status-available { background-color: #d4edda; color: #155724; }
+    .status-sold { background-color: #f8d7da; color: #721c24; }
+    .status-rented { background-color: #fff3cd; color: #856404; }
+    .actions-cell { display: flex; gap: 8px; }
+    .empty-state { text-align: center; padding: 60px 20px; color: #6c757d; }
+    .loading { text-align: center; padding: 40px; color: #6c757d; }
+    .stats-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 25px; }
+    .stat-card { background: white; padding: 20px; border-radius: 8px; text-align: center; }
+    .stat-card h3 { font-size: 14px; color: #6c757d; margin-bottom: 10px; text-transform: uppercase; }
+    .stat-number { font-size: 28px; font-weight: 700; color: #2c3e50; }
+    .no-image { width: 70px; height: 70px; background: #f8f9fa; border: 1px dashed #dee2e6; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #adb5bd; font-size: 12px; }
+    .property-title { font-weight: 600; color: #2c3e50; display: block; margin-bottom: 4px; }
+    .property-meta { font-size: 12px; color: #6c757d; }
+  </style>
+</head>
+<body>
+  <div class="admin-container">
+    <aside class="sidebar">
+      <div class="sidebar-brand"><h2>PokuRoja Admin</h2></div>
+      <nav class="sidebar-nav">
+        <a href="Dashboard.html" class="nav-link">Dashboard</a>
+        <a href="properties.html" class="nav-link active">Properties</a>
+        <a href="addproperty.html" class="nav-link">Add Property</a>
+        <a href="landlorddetails.html" class="nav-link">Landlord Details</a>
+        <a href="blog.html" class="nav-link">Blog</a>
+        <a href="login.html" class="nav-link">Logout</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="header">
+        <h1>All Properties</h1>
+        <div class="user-info">
+          <span id="userEmail">admin@pokuroja.com</span>
+          <button class="test-btn" onclick="testImages()">🖼️ Test</button>
+          <button class="debug-btn" onclick="showDebug()">🐛 Debug</button>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="page-header">
+          <h2>Property Management</h2>
+          <a href="addproperty.html" class="btn-primary">Add New Property</a>
+        </div>
+
+        <div class="stats-summary">
+          <div class="stat-card"><h3>Total</h3><div class="stat-number" id="totalCount">0</div></div>
+          <div class="stat-card"><h3>Available</h3><div class="stat-number" id="availableCount">0</div></div>
+          <div class="stat-card"><h3>Sold</h3><div class="stat-number" id="soldCount">0</div></div>
+          <div class="stat-card"><h3>Rented</h3><div class="stat-number" id="rentedCount">0</div></div>
+        </div>
+
+        <div class="filters">
+          <input type="text" id="searchProperties" placeholder="Search...">
+          <select id="filterStatus">
+            <option value="">All Status</option>
+            <option value="available">Available</option>
+            <option value="sold">Sold</option>
+            <option value="rented">Rented</option>
+          </select>
+          <select id="filterCategory">
+            <option value="">All Categories</option>
+            <option value="kuGhetto">kuGhetto</option>
+            <option value="Suburb">Suburb</option>
+          </select>
+        </div>
+
+        <table class="properties-table">
+          <thead><tr><th>Image</th><th>Details</th><th>Price</th><th>Location</th><th>Beds/Baths</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="propertiesTableBody"><tr><td colspan="7" class="loading">Loading...</td></tr></tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const API_BASE = window.location.origin + '/api';
+    let allProperties = [];
+
+    function formatPrice(price) {
+      return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 }).format(price || 0);
+    }
+
+    function getStatusBadge(status) {
+      const map = { 'available': 'status-available', 'sold': 'status-sold', 'rented': 'status-rented' };
+      const cls = map[status?.toLowerCase()] || 'status-available';
+      const text = status || 'Unknown';
+      return `<span class="status-badge ${cls}">${text.charAt(0).toUpperCase() + text.slice(1)}</span>`;
+    }
+
+    function testImages() {
+      if (!allProperties.length) { alert('No properties'); return; }
+      let loaded = 0, failed = 0, total = 0;
+      allProperties.forEach(prop => {
+        const urls = prop.image_urls || (prop.image_url ? [prop.image_url] : []);
+        total += urls.length;
+        urls.forEach(url => {
+          const img = new Image();
+          img.onload = () => { loaded++; if (loaded + failed === total) alert(`✅ Loaded: ${loaded}\n❌ Failed: ${failed}`); };
+          img.onerror = () => { failed++; if (loaded + failed === total) alert(`✅ Loaded: ${loaded}\n❌ Failed: ${failed}`); };
+          img.src = url;
+        });
+      });
+      if (!total) alert('No images found');
+    }
+
+    function showDebug() {
+      console.log('=== DEBUG ===');
+      console.log('Properties:', allProperties.length);
+      allProperties.forEach((p, i) => {
+        console.log(`${i+1}. ${p.title}:`, p.image_urls || p.image_url);
+      });
+      alert(`Debug info in console (F12)\nProperties: ${allProperties.length}`);
+    }
+
+    function updateStats(properties) {
+      document.getElementById('totalCount').textContent = properties.length;
+      document.getElementById('availableCount').textContent = properties.filter(p => p.status === 'available').length;
+      document.getElementById('soldCount').textContent = properties.filter(p => p.status === 'sold').length;
+      document.getElementById('rentedCount').textContent = properties.filter(p => p.status === 'rented').length;
+    }
+
+    async function loadProperties() {
+      const tbody = document.getElementById('propertiesTableBody');
+      tbody.innerHTML = '<tr><td colspan="7" class="loading">Loading...</td></tr>';
+      
+      try {
+        const response = await fetch(`${API_BASE}/properties`);
+        let data = await response.json();
+        
+        let properties = Array.isArray(data) ? data : (data.data || data.properties || [data]);
+        properties = properties.filter(p => p).map(p => ({ ...p, id: p.id || p._id, status: p.status || 'available' }));
+        
+        allProperties = properties;
+        console.log('Loaded properties:', allProperties.length);
+        
+        updateStats(allProperties);
+        
+        const search = document.getElementById('searchProperties').value.toLowerCase();
+        const status = document.getElementById('filterStatus').value;
+        const category = document.getElementById('filterCategory').value;
+        
+        const filtered = allProperties.filter(p => {
+          const matchSearch = !search || (p.title?.toLowerCase().includes(search) || p.location?.toLowerCase().includes(search));
+          const matchStatus = !status || p.status === status;
+          const matchCategory = !category || p.category === category;
+          return matchSearch && matchStatus && matchCategory;
+        });
+        
+        if (!filtered.length) {
+          tbody.innerHTML = '<tr><td colspan="7" class="empty-state">No properties found</td></tr>';
+          return;
+        }
+        
+        tbody.innerHTML = filtered.map(p => {
+          const imageUrl = p.image_urls?.[0] || p.image_url;
+          const price = typeof p.price === 'string' ? parseFloat(p.price) : (p.price || 0);
+          const imageHtml = imageUrl 
+            ? `<img src="${imageUrl}" class="property-image" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'no-image\'>Error</div>';">`
+            : '<div class="no-image">No image</div>';
+          
+          return `
+            <tr>
+              <td>${imageHtml}</td>
+              <td>
+                <span class="property-title">${p.title || 'Untitled'}</span>
+                <span class="property-meta">${p.category || ''}${p.propertyType ? ` • ${p.propertyType}` : ''}</span>
+              </td>
+              <td><strong>${formatPrice(price)}</strong></td>
+              <td>${p.location || p.address || 'N/A'}</td>
+              <td>${p.bedrooms || p.bathrooms ? `${p.bedrooms || 0} bed • ${p.bathrooms || 0} bath` : '-'}</td>
+              <td>${getStatusBadge(p.status)}</td>
+              <td class="actions-cell">
+                <a href="addproperty.html?id=${p.id}" class="btn-edit">Edit</a>
+                <button class="btn-danger" onclick="deleteProperty('${p.id}')">Delete</button>
+              </td>
+            </tr>
+          `;
+        }).join('');
+        
+      } catch (error) {
+        console.error('Error:', error);
+        tbody.innerHTML = `<tr><td colspan="7" class="empty-state">Error: ${error.message}<br><button onclick="loadProperties()">Retry</button></td></tr>`;
+      }
+    }
+    
+    async function deleteProperty(id) {
+      if (!confirm('Delete this property?')) return;
+      try {
+        const token = localStorage.getItem('token');
+        const res = await fetch(`${API_BASE}/properties/${id}`, {
+          method: 'DELETE',
+          headers: { 'Authorization': token ? `Bearer ${token}` : '' }
+        });
+        if (!res.ok) throw new Error('Delete failed');
+        alert('Deleted!');
+        loadProperties();
+      } catch (error) {
+        alert('Error: ' + error.message);
+      }
+    }
+    
+    document.getElementById('searchProperties').addEventListener('input', loadProperties);
+    document.getElementById('filterStatus').addEventListener('change', loadProperties);
+    document.getElementById('filterCategory').addEventListener('change', loadProperties);
+    
+    window.deleteProperty = deleteProperty;
+    window.testImages = testImages;
+    window.showDebug = showDebug;
+    window.loadProperties = loadProperties;
+    
+    document.addEventListener('DOMContentLoaded', loadProperties);
+  </script>
+</body>
+</html>

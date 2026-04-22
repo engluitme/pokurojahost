@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Test</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { color: #333; margin-bottom: 20px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; color: #666; font-weight: bold; }
+        input[type="file"] {
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        input[type="file"]:hover { border-color: #667eea; }
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            transition: transform 0.2s;
+        }
+        button:hover { transform: translateY(-2px); }
+        button:disabled { opacity: 0.6; cursor: not-allowed; }
+        .preview {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .preview img {
+            max-width: 300px;
+            max-height: 300px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .console {
+            background: #1e1e1e;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            line-height: 1.4;
+        }
+        .console-line { margin-bottom: 4px; }
+        .console-success { color: #4caf50; }
+        .console-error { color: #f44336; }
+        .console-info { color: #00bcd4; }
+        .status {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .status.success { background: #c8e6c9; color: #2e7d32; }
+        .status.error { background: #ffcdd2; color: #c62828; }
+        .status.info { background: #b3e5fc; color: #0277bd; }
+        .status.loading { background: #ffe0b2; color: #e65100; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🖼️ Image Upload Test</h1>
+        <p style="color: #666; margin-bottom: 20px;">Test the image upload functionality in isolation</p>
+        
+        <div class="form-group">
+            <label for="tokenInput">Authentication Token (from localStorage):</label>
+            <input type="text" id="tokenInput" placeholder="Will auto-fill from localStorage on load" readonly style="background: #f9f9f9; color: #999;">
+        </div>
+
+        <div class="form-group">
+            <label for="fileInput">Select Image File:</label>
+            <input type="file" id="fileInput" accept="image/*" placeholder="Select an image...">
+        </div>
+
+        <button id="uploadBtn" onclick="uploadFile()" disabled>Upload Image</button>
+
+        <div id="status" class="status" style="display: none;"></div>
+
+        <div class="preview" id="preview" style="display: none;">
+            <img id="previewImg" src="" alt="Preview">
+            <div id="uploadUrl" style="word-break: break-all; background: #f0f0f0; padding: 10px; border-radius: 4px; font-size: 12px;"></div>
+        </div>
+
+        <div class="console" id="console"></div>
+    </div>
+
+    <script>
+        const API_BASE = window.location.origin + '/api';
+        const tokenInput = document.getElementById('tokenInput');
+        const fileInput = document.getElementById('fileInput');
+        const uploadBtn = document.getElementById('uploadBtn');
+        const statusDiv = document.getElementById('status');
+        const previewDiv = document.getElementById('preview');
+        const console_element = document.getElementById('console');
+
+        function log(message, type = 'info') {
+            const line = document.createElement('div');
+            line.className = `console-line console-${type}`;
+            line.textContent = `[${type.toUpperCase()}] ${message}`;
+            console_element.appendChild(line);
+            console_element.scrollTop = console_element.scrollHeight;
+            
+            // Also log to browser console
+            if (type === 'error') console.error(message);
+            else if (type === 'success') console.log('%c' + message, 'color: green;');
+            else console.log(message);
+        }
+
+        function showStatus(message, type = 'info') {
+            statusDiv.textContent = message;
+            statusDiv.className = `status ${type}`;
+            statusDiv.style.display = 'block';
+        }
+
+        // Load token on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            const token = localStorage.getItem('token');
+            if (token) {
+                tokenInput.value = token.substring(0, 50) + '...';
+                uploadBtn.disabled = false;
+                log('Token loaded from localStorage', 'success');
+            } else {
+                log('No token found in localStorage - need to login first', 'error');
+                showStatus('❌ Not logged in. Go to login.html first.', 'error');
+            }
+        });
+
+        // Enable upload button when file is selected
+        fileInput.addEventListener('change', function() {
+            if (this.files[0]) {
+                const file = this.files[0];
+                log(`File selected: ${file.name} (${(file.size / 1024).toFixed(2)} KB, type: ${file.type})`, 'info');
+                
+                // Show preview
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('previewImg').src = e.target.result;
+                    previewDiv.style.display = 'block';
+                    log('Local preview loaded', 'info');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        async function uploadFile() {
+            const file = fileInput.files[0];
+            const token = localStorage.getItem('token');
+
+            if (!file) {
+                showStatus('❌ Please select a file first', 'error');
+                return;
+            }
+
+            if (!token) {
+                showStatus('❌ No authentication token. Login first.', 'error');
+                return;
+            }
+
+            uploadBtn.disabled = true;
+            uploadBtn.textContent = 'Uploading...';
+            showStatus('⏳ Uploading...', 'loading');
+            
+            try {
+                log(`Starting upload to ${API_BASE}/upload`, 'info');
+                
+                const formData = new FormData();
+                formData.append('image', file);
+
+                log(`FormData created with field: 'image'`, 'info');
+                log(`Token: ${token.substring(0, 20)}...`, 'info');
+
+                const response = await fetch(`${API_BASE}/upload`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` },
+                    body: formData
+                });
+
+                log(`Upload response: HTTP ${response.status}`, response.status === 200 ? 'success' : 'error');
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+                    throw new Error(errorData.error || `HTTP ${response.status}`);
+                }
+
+                const data = await response.json();
+                log(`Upload successful!`, 'success');
+                log(`File URL: ${data.url}`, 'success');
+
+                document.getElementById('uploadUrl').innerHTML = `
+                    <strong>Upload URL:</strong><br>
+                    <code>${data.url}</code><br><br>
+                    <strong>Full Path:</strong><br>
+                    <code>${window.location.origin}${data.url}</code>
+                `;
+
+                showStatus(`✅ Upload successful! URL: ${data.url}`, 'success');
+
+            } catch (error) {
+                log(`Upload failed: ${error.message}`, 'error');
+                showStatus(`❌ ${error.message}`, 'error');
+            } finally {
+                uploadBtn.disabled = false;
+                uploadBtn.textContent = 'Upload Image';
+            }
+        }
+
+        // Allow Enter key to upload
+        fileInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') uploadFile();
+        });
+    </script>
+</body>
+</html>

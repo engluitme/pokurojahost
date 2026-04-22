@@ -1,0 +1,42 @@
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Python
+__pycache__/
+*.py[cod]
+*.sqlite3
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Editor directories
+.vscode/
+.idea/
+
+# Environment
+.env
+.env.local
+
+# Build / output
+dist/
+build/
+.cache/
+
+# Logs
+logs/
+*.log
+
+# Misc
+.sass-cache/
+coverage/
+*.tmp
+Rec.zip
+
+# Render
+.render
+.render/
