@@ -4,7 +4,7 @@ services:
     name: pokuroja-backend
     runtime: node
     buildCommand: cd pokurojahouses-main/backend && npm install
-    startCommand: node backend/server.js
+    startCommand: node backend/backend/server.js
     workingDirectory: pokurojahouses-main
     envVars:
       - key: NODE_ENV
